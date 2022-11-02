@@ -12,8 +12,8 @@ const CelcatElement = (props) => {
   
     return(
       <View style={[{  backgroundColor: background, height: heightElement }, styles.shadow, styles.celcatElementContainer ]}>
-        <Text>{props.course}</Text>
         <Text>{props.type}</Text>
+        <Text>{props.course}</Text>
         <Text>{props.room}</Text>
         <Text style={{flex: 1, flexWrap: 'wrap'}}>{props.dateStart} - {props.dateEnd}</Text>
       </View>
