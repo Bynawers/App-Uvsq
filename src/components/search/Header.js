@@ -8,17 +8,17 @@ const Header = (props) => {
         <Text style={[ { color: props.theme.classic.textLight }, styles.title ]}>CELCAT Calendar</Text>
         <View style={[ styles.headerButtonContainer ]}>
           <View style={[{ backgroundColor: props.theme.classic.foreground }, styles.switchTypeContainer, styles.shadow ]}>
-            <TouchableOpacity style={[{ backgroundColor: props.toggleType ? props.theme.classic.secondary : props.theme.classic.foreground }, styles.switchButton ]}
-              onPress={() => props.switchType("day")}>
-              <Text style={[{ color: props.toggleType ? props.theme.classic.textLight : props.theme.classic.textDark }, styles.text ]}>Jours</Text>
+            <TouchableOpacity style={[{ backgroundColor: props.toggleType === "day" ? props.theme.classic.secondary : props.theme.classic.foreground }, styles.switchButton ]}
+              onPress={() => props.setToggleType("day")}>
+              <Text style={[{ color: props.toggleType === "day" ? props.theme.classic.textLight : props.theme.classic.textDark }, styles.text ]}>Jours</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[{ backgroundColor: props.toggleType ? props.theme.classic.foreground : props.theme.classic.secondary }, styles.switchButton ]}
-              onPress={() => props.switchType("week")}>
-              <Text style={[{ color: props.toggleType ? props.theme.classic.textDark : props.theme.classic.textLight}, styles.text ]}>Semaines</Text>
+            <TouchableOpacity style={[{ backgroundColor: props.toggleType === "day" ? props.theme.classic.foreground : props.theme.classic.secondary }, styles.switchButton ]}
+              onPress={() => props.setToggleType("week")}>
+              <Text style={[{ color: props.toggleType === "day" ? props.theme.classic.textDark : props.theme.classic.textLight}, styles.text ]}>Semaines</Text>
             </TouchableOpacity>
           </View>
           <TouchableOpacity style={[{ backgroundColor: props.theme.classic.foreground }, styles.todayButton, styles.shadow ]}
-          onPress={() => props.todayDate()}>
+          onPress={() => props.todayDate(444)}>
             <Text style={[{ color: props.theme.classic.textDark}, styles.text ]}>Aujourd'hui</Text>
           </TouchableOpacity>
         </View>

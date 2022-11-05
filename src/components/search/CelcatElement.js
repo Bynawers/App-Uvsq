@@ -3,19 +3,29 @@ import { StyleSheet, Text, View } from 'react-native';
 
 const CelcatElement = (props) => {
 
-    let heightElement = props.type === "CM" ? 1.5*60 : 3*60;
+    let start = new Date(props.day+" "+props.dateStart);
+    let end = new Date(props.day+" "+props.dateEnd);
+    let difference = (end.getTime() - start.getTime())/(1000*60*60);
+
+    let heightElement = difference <= 1.5 ? 1.7*60 : difference*60;
+
     let background = props.type === "CM" ? '#8CE5FF' : 
-    props.type === "TD" ? "#70B6FF" : 
+    props.type === "TD" ? "#70B6FF" :
     props.type === "TD Cartable Numérique" ? '#FDE6AD' : 
     props.type === "TP" ? "#81FF7A" :
     props.type === "Contrôle continu" ? "#FEA9FE" : "pink";
   
     return(
-      <View style={[{  backgroundColor: background, height: heightElement }, styles.shadow, styles.celcatElementContainer ]}>
-        <Text>{props.type}</Text>
-        <Text>{props.course}</Text>
-        <Text>{props.room}</Text>
-        <Text style={{flex: 1, flexWrap: 'wrap'}}>{props.dateStart} - {props.dateEnd}</Text>
+      <View style={[{  backgroundColor: background, height: heightElement, flexShrink: 1 }, styles.shadow, styles.celcatElementContainer ]}>
+        <Text style={{ flexShrink: 1}}>
+            <Text style={{ fontWeight: "500" }}>{props.dateStart} - {props.dateEnd} - {props.type}{"\n"}</Text>
+            <Text style={{ fontWeight: "500" }}>Cours : </Text>
+            <Text style={{ flexShrink: 1, fontWeight: "300" }}>{props.course}{"\n"}</Text>
+            <Text style={{ fontWeight: "500" }}>Salle : </Text>
+            <Text style={{ flexShrink: 1, fontWeight: "300" }}>{props.room}{"\n"}</Text>
+            <Text style={{ fontWeight: "500" }}>Groupe : </Text>
+            <Text style={{ flexShrink: 1, fontWeight: "300" }}>{props.group}</Text>
+        </Text>
       </View>
     );
   }
@@ -28,7 +38,7 @@ const styles = StyleSheet.create({
         borderColor: "#858585", 
         marginTop: 10, 
         paddingLeft: 10, 
-        paddingTop: 5 
+        paddingTop: 5,
     },
     shadow: {
         shadowColor: '#171717',

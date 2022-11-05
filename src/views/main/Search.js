@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AntDesign, Ionicons } from '@expo/vector-icons';
+import { Ionicons, Feather } from '@expo/vector-icons';
 import { StyleSheet, SafeAreaView, View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import axios, * as others from 'axios';
@@ -15,9 +15,11 @@ export default function Search() {
   const theme = useTheme();
 
   const [modalGroups, setModalGroups] = useState(false);
+  const [groupListVisible, setGroupListVisible] = useState(true);
 
-  const [toggleType, setToggleType] = useState(true);
+  const [toggleType, setToggleType] = useState("day");
   const [pageLoad, setPageLoad] = useState(false);
+  const [sorted, isSorted] = useState(false);
   const [date, setDate] = useState("7 septembre");
   const [day, setDay] = useState("lundi");
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -25,6 +27,8 @@ export default function Search() {
 
   const [listGroup, setListGroup] = useState([]);
   const [group, setGroup] = useState("");
+
+  let dateWeekDisplay = true;
 
   const onPageLoad = () => {
     if (pageLoad === true) { return }
@@ -34,49 +38,92 @@ export default function Search() {
   }
 
   useEffect(() => {
-    setDay(dateToString(currentDate.getDate(), "day"));
-    setDate(currentDate.getDate()+" "+dateToString(currentDate.getMonth(), "month")+" "+currentDate.getFullYear());
+    refreshDateRendering(0);
+  }, [toggleType])
+
+  useEffect(() => {
     getTimeTable();
   }, [currentDate, group]);
+
+  useEffect(() => {
+    if (sorted === false) {
+      let timetableSorted = [];
+      let indexSorted = [];
+
+      const dateComparison = (a, b) => {
+        let date1 = new Date(a.date)
+        let date2 = new Date(b.date)
+        
+        return date1 - date2;
+      }
+      timetable.map((item, index) => indexSorted.push({date: item.date, id: index}));
+      indexSorted.sort(dateComparison);
+      indexSorted.map(item => timetableSorted.push(timetable[item.id]));
+      setTimetable(timetableSorted);
+      isSorted(true);
+    }
+  }, [sorted]);
 
   const toggleModal = () => {
     setModalGroups(!modalGroups);
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
   }
+  const todayDate = () => {
+    setCurrentDate(new Date());
+    refreshDateRendering(0);
+  }
 
+  const refreshDateRendering = (add) => {
+    let new_currentDate;
+    if (add === 444) {
+      new_currentDate = new Date();
+    }
+    else {
+      new_currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + add);
+    }
+    if (toggleType === "day") {
+      setDay(dateToString(new_currentDate, "day"));
+      setDate(new_currentDate.getDate()+" "+dateToString(new_currentDate, "month")+" "+new_currentDate.getFullYear());
+      setCurrentDate(new_currentDate);
+    }
+    else {
+      let tempStart = "lun " + getDayCurrentWeek(new_currentDate, 0).getDate();
+      let tempEnd = "dim " + getDayCurrentWeek(new_currentDate, 6).getDate();
+      setDay(tempStart+" - "+tempEnd);
+      setDate(dateToString(new_currentDate, "month")+" "+new_currentDate.getFullYear());
+      setCurrentDate(getDayCurrentWeek(new_currentDate, -7));
+    }
+  }
+  const getDayCurrentWeek = (current, add) => {
+    let today = current;
+    const first = today.getDate() - today.getDay() + 1;
+    const day = new Date(today.setDate(first + add));
+    return day;
+  }
   const dateToString = (date, type) => {
     switch(type){
       case "month": {
         const month = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "decembre"];
-        return month[date];
+        return month[date.getMonth()];
       }
       case "day": {
-        return currentDate.toLocaleString("fr", { weekday: "long" })
+        return date.toLocaleString("fr", { weekday: "long" })
       }
     }
-  }
-
-  const changeDate = (add) => {
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + add));
-  } 
-  const todayDate = () => {
-    setCurrentDate(new Date());
   }
   const getMonthString = (date) => {
     let month = date.getMonth() + 1;
     return month < 10 ? '0' + month : '' + month;
   }  
 
-  const switchType = (type) => {
-    if (type === "day" && !toggleType || type === "week" && toggleType ) {
-      setToggleType(!toggleType)
-    }
-  }
-
   async function getTimeTable() {
-    let date = currentDate.getFullYear()+"-"+getMonthString(currentDate)+"-"+currentDate.getDate();
     if (group !== "") {
-      fetchTimetable(date, date, group);
+      console.log("fetch...")
+      let date = currentDate;
+      let dateStart = date.getFullYear()+"-"+getMonthString(date)+"-"+date.getDate();
+      let dateEnd = date.addDays(6);
+      dateEnd = dateEnd.getFullYear()+"-"+getMonthString(dateEnd)+"-"+dateEnd.getDate();
+      fetchTimetable(dateStart, toggleType === "day" ? dateStart : dateEnd, group);
     }
   }
   async function fetchTimetable(date_start, date_end, td) {
@@ -105,6 +152,7 @@ export default function Search() {
       output.push(newCelcatEvent(dataRecode, data[i].start, data[i].end, data[i].faculty))
     }
     setTimetable(output);
+    isSorted(false);
   }
   function recode( string ) {
     let new_string = string.replaceAll("&#233;", "é");
@@ -120,6 +168,8 @@ export default function Search() {
   function newCelcatEvent( string, dateStart, dateEnd, faculty ) {
     let new_string = string.split("$");
     let newDateStart = dateStart.split("T");
+    let newDay = newDateStart[0];
+    newDay = newDay.replaceAll('-', '/');
     newDateStart = newDateStart[1].split(":")
     newDateStart = newDateStart[0]+":"+newDateStart[1];
     let newDateEnd = dateEnd.split("T");
@@ -131,7 +181,9 @@ export default function Search() {
       matiere: new_string[2],
       groupe: new_string[3],
       heureDebut: newDateStart,
-      heureFin: newDateEnd
+      heureFin: newDateEnd,
+      day: newDay,
+      date: newDay+" "+newDateStart
     }
   }
   
@@ -142,23 +194,27 @@ export default function Search() {
       <View style={[{ backgroundColor: theme.classic.primary }, styles.backgroundContainer]}>
         
 
-        <Header theme={theme} switchType={switchType} toggleType={toggleType} todayDate={todayDate}/>
+        <Header theme={theme} toggleType={toggleType} setToggleType={setToggleType} todayDate={refreshDateRendering}/>
 
         <View style={[ { backgroundColor: theme.classic.foreground }, styles.foregroundContainer]}>
           <View style={styles.selectContainer}>
-            <TouchableOpacity style={{ marginLeft: '10%', padding: 10}} onPress={() => changeDate(-1)}>
-              <AntDesign name="left" size={35} color={theme.classic.textDark}/>
+            <TouchableOpacity style={{ marginLeft: '10%', padding: 10}} onPress={() => refreshDateRendering(toggleType === "day" ? -1 : -7)}>
+              <Feather name="chevron-left" size={35} color={theme.classic.textDark}/>
             </TouchableOpacity>
-            <View style={styles.dateContainer}>
+            <TouchableOpacity style={styles.dateContainer}>
               <Text style={[{color: theme.classic.textDark}, styles.textDay]}>{day}</Text>
               <Text style={[{color: theme.classic.textDark}, styles.textDate]}>{date}</Text>
-            </View>
-            <TouchableOpacity style={{ marginRight: '10%', padding: 10}} onPress={() => changeDate(+1)}>
-              <AntDesign name="right" size={35} color={theme.classic.textDark}/>
+            </TouchableOpacity>
+            <TouchableOpacity style={{ marginRight: '10%', padding: 10}} onPress={() => refreshDateRendering(toggleType === "day" ? 1 : 7)}>
+              <Feather name="chevron-right" size={35} color={theme.classic.textDark}/>
             </TouchableOpacity>
           </View>
-          <View style={{ marginLeft: 10 }}>
-            <Text style={{ fontSize: 20, fontWeight: "300" }}>Mes groupes</Text>
+
+          <View style={{ marginLeft: 10, marginBottom: groupListVisible ? 0 : 10 }}>
+            <TouchableOpacity style={{ flexDirection: "row", alignItems: "center" }} onPress={() => setGroupListVisible(!groupListVisible)}>
+              <Text style={{ fontSize: 20, fontWeight: "300", marginRight: 10 }}>Mes groupes</Text>
+            </TouchableOpacity>
+            {groupListVisible &&
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <TouchableOpacity style={styles.addGroups} onPress={() => toggleModal()}>
                 <Ionicons name="add" color={theme.classic.textDark} size={35}/>
@@ -170,7 +226,7 @@ export default function Search() {
                   </React.Fragment>
                 );
               })}
-            </View>
+            </View>}
           </View>
           
           <View style={ styles.line }/>
@@ -179,9 +235,17 @@ export default function Search() {
             <ScrollView style={[{ backgroundColor: "#f2f2f2" }, styles.timetableContainer]} contentContainerStyle={{ paddingBottom: 200 }}>
               <View style={{ alignItems: "center" }}>
                 {timetable.map((item, index) => {
+
+                  let date = new Date(item.date);
+                  dateWeekDisplay = true;
+                  if (index === 0) {}
+                  else if (timetable[index].day == timetable[index - 1].day) {
+                    dateWeekDisplay = false;
+                  }
                   return(
                     <React.Fragment key={index}>
-                      <CelcatElement time={1.5} course={item.matiere} room={item.salle} type={item.type} dateStart={item.heureDebut} dateEnd={item.heureFin}/>
+                      {toggleType === "week" && dateWeekDisplay && <Text style={styles.titleDay}>{dateToString(date, "day")} {date.getDate()} {dateToString(date, "month")} {date.getFullYear()}</Text>}
+                      <CelcatElement time={1.5} course={item.matiere} group={item.groupe} room={item.salle} type={item.type} dateStart={item.heureDebut} dateEnd={item.heureFin} day={item.day}/>
                     </React.Fragment>
                   );
                 })}
@@ -206,6 +270,12 @@ const GroupElement = (props) => {
       <Text style={{color: props.group === props.code ? props.theme.classic.textLight : props.theme.classic.textDark}}>{props.code}</Text>
     </TouchableOpacity>
   );
+}
+
+Date.prototype.addDays = function(days) {
+  var date = new Date(this.valueOf());
+  date.setDate(date.getDate() + days);
+  return date;
 }
 
 const styles = StyleSheet.create({
@@ -278,5 +348,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginRight: 10
+  },
+  titleDay: {
+    fontSize: 15,
+    marginTop: 10,
+    fontWeight: '600'
   }
 });
