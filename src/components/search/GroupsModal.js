@@ -62,6 +62,7 @@ const GroupsModal = (props) => {
       props.setListGroup(oldArray => [...oldArray, { "code": code }]);
     }
     props.toggleModal();
+    props.setGroup(code)
   }
 
   return (

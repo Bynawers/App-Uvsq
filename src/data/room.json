@@ -1,0 +1,17 @@
+{
+    "GERMAIN": [
+        "G001 - GERMAIN", "G002 - GERMAIN", "G003 - GERMAIN", "G007 - GERMAIN",
+        "G101 - GERMAIN", "G103 - GERMAIN", "G104 - GERMAIN", "G105 - GERMAIN", "G107 - GERMAIN",
+        "G201 - GERMAIN", "G203 - GERMAIN", "G204 - GERMAIN", "G205 - GERMAIN", "G206 - GERMAIN", "G207 - GERMAIN", "G209 - GERMAIN", "G210 - GERMAIN"
+    ],
+    "FERMAT": [
+        "2102 - FERMAT", "2104 - FERMAT", "2105 - FERMAT", "2106 - FERMAT", "2107 - FERMAT",
+        "2201 - FERMAT", "2202 - FERMAT", "2203 - FERMAT", "2204 - FERMAT", "2205 - FERMAT", "2206 - FERMAT"
+    ],
+    "BUFFON": [
+        "101 - BUFFON", "102 - BUFFON", "103 - BUFFON", "104 - BUFFON"
+    ],
+    "DESCARTES": [
+        
+    ]
+}

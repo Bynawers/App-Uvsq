@@ -1,0 +1,14 @@
+[
+    {"batiment": "FERMAT", "empty": true, "room": "2104 - FERMAT", "until": "toute la journée"},
+    {"batiment": "FERMAT", "empty": true, "room": "2107 - FERMAT", "until": "toute la journée"},
+    {"batiment": "FERMAT", "empty": false, "room": "2106 - FERMAT", "until": ""},
+    {"batiment": "FERMAT" ,"empty": false, "room": "2201 - FERMAT", "until": ""},
+    {"batiment": "FERMAT", "empty": true, "room": "2105 - FERMAT", "until": "toute la journée"},
+    {"batiment": "FERMAT", "empty": false, "room": "2206 - FERMAT", "until": ""},
+    {"batiment": "FERMAT", "empty": false, "room": "2102 - FERMAT", "until": ""},
+    {"batiment": "FERMAT", "empty": false, "room": "2203 - FERMAT", "until": ""},
+    {"batiment": "FERMAT", "empty": false, "room": "2202 - FERMAT", "until": ""},
+    {"batiment": "FERMAT", "empty": true, "room": "2204 - FERMAT", "until": "jusqu'à 16:50"},
+    {"batiment": "FERMAT", "empty": true, "room": "2205 - FERMAT", "until": "toute la journée"}
+
+]

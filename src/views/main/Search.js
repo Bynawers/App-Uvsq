@@ -190,11 +190,12 @@ export default function Search() {
   onPageLoad();
 
   return (
-    <SafeAreaView style={[{ backgroundColor: theme.classic.primary }, styles.safeAreaStyle]}>
+    <View style={[{ backgroundColor: theme.classic.primary }, styles.safeAreaStyle]}>
       <View style={[{ backgroundColor: theme.classic.primary }, styles.backgroundContainer]}>
         
-
-        <Header theme={theme} toggleType={toggleType} setToggleType={setToggleType} todayDate={refreshDateRendering}/>
+        <View style={{ height: "15%", alignItems: "center", alignSelf: "center"}}>
+          <Header theme={theme} toggleType={toggleType} setToggleType={setToggleType} todayDate={refreshDateRendering}/>
+        </View>
 
         <View style={[ { backgroundColor: theme.classic.foreground }, styles.foregroundContainer]}>
           <View style={styles.selectContainer}>
@@ -256,10 +257,10 @@ export default function Search() {
 
         </View>
       
-        <GroupsModal toggleModal={toggleModal} modalGroups={modalGroups} setListGroup={setListGroup} listGroup={listGroup}/>
+        <GroupsModal toggleModal={toggleModal} modalGroups={modalGroups} setListGroup={setListGroup} listGroup={listGroup} setGroup={setGroup}/>
 
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -282,7 +283,8 @@ const styles = StyleSheet.create({
   safeAreaStyle: {
     justifyContent: 'center', 
     alignItems: 'center', 
-    flex: 1
+    flex: 1,
+
   },
   shadow: {
     shadowColor: '#171717',

@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Home from "../views/main/Home.js";
 import Search from "../views/main/Search";
-import Profile from "../views/main/Profile.js";
+import FindRoom from "../views/main/FindRoom.js";
 
 import { useTheme } from 'react-native-paper';
 
@@ -27,10 +27,10 @@ export default function MyTabs() {
               iconName = focused ? 'home' : 'home-outline';
             } 
             else if (rn === "CELCAT") {
-              iconName = focused ? 'ios-search' : 'search-outline';
+              iconName = focused ? 'book' : 'book-outline';
             } 
-            else if (rn === "Profile") {
-              iconName = focused ? 'person' : 'person-outline';
+            else if (rn === "FindRoom") {
+              iconName = focused ? 'ios-search' : 'search-outline';
             }
             return <Ionicons name={iconName} size={35} color={color} />;
         },
@@ -57,8 +57,8 @@ export default function MyTabs() {
         component={ Search }
       />
       <Tab.Screen
-        name="Profile"
-        component={ Profile }
+        name="FindRoom"
+        component={ FindRoom }
       />
     </Tab.Navigator>
   );
