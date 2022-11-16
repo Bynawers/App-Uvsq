@@ -4,7 +4,7 @@ import { Provider as PaperProvider } from 'react-native-paper';
 
 import { NavigationContainer } from '@react-navigation/native';
 
-import BottomTabNavigation from './src/containers/BottomTabNavigation.js';
+import DrawerNavigator from "./src/containers/DrawerNavigation.js";
 
 const themes = require("./src/shared/themes.json");
 
@@ -12,7 +12,7 @@ export default function App() {
   return (
     <PaperProvider theme={themes}>
       <NavigationContainer>
-        <BottomTabNavigation/>
+        <DrawerNavigator />
       </NavigationContainer>
       <StatusBar style="light" />
     </PaperProvider>

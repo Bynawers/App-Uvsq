@@ -10,7 +10,7 @@ import CelcatElement from '../../components/search/CelcatElement';
 import GroupsModal from '../../components/search/GroupsModal';
 import Header from '../../components/search/Header';
 
-export default function Search() {
+export default function Search({navigation}) {
 
   const theme = useTheme();
 
@@ -257,7 +257,7 @@ export default function Search() {
 
         </View>
       
-        <GroupsModal toggleModal={toggleModal} modalGroups={modalGroups} setListGroup={setListGroup} listGroup={listGroup} setGroup={setGroup}/>
+        <GroupsModal theme={theme} toggleModal={toggleModal} modalGroups={modalGroups} setListGroup={setListGroup} listGroup={listGroup} setGroup={setGroup} group={group} setTimetable={setTimetable}/>
 
       </View>
     </View>

@@ -2,9 +2,7 @@ import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import Home from "../views/main/Home.js";
-import Search from "../views/main/Search";
-import FindRoom from "../views/main/FindRoom.js";
+import { SearchStackNavigator, HomeStackNavigator, FindRoomStackNavigator } from "./StackNavigation.js"
 
 import { useTheme } from 'react-native-paper';
 
@@ -16,14 +14,14 @@ export default function MyTabs() {
 
     return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="HomeBottom"
       screenOptions={({ route }) =>({
 
         tabBarIcon: ({ focused, color, size }) => {
             let iconName;
             let rn = route.name;
 
-            if (rn === "Home") {
+            if (rn === "HomeBottom") {
               iconName = focused ? 'home' : 'home-outline';
             } 
             else if (rn === "CELCAT") {
@@ -49,16 +47,16 @@ export default function MyTabs() {
         })}>
 
       <Tab.Screen
-        name="Home"
-        component={ Home }
+        name="HomeBottom"
+        component={ HomeStackNavigator }
       />
       <Tab.Screen
         name="CELCAT"
-        component={ Search }
+        component={ SearchStackNavigator }
       />
       <Tab.Screen
         name="FindRoom"
-        component={ FindRoom }
+        component={ FindRoomStackNavigator }
       />
     </Tab.Navigator>
   );

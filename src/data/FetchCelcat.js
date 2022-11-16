@@ -45,29 +45,38 @@ function newCelcatEvent( string, dateStart, dateEnd ) {
 }
 
 export function isEmptyRoom(room, data, batiment) {
-    let currentDate = new Date();
+    let currentDate = new Date("2022/11/10 12:00");
     let isEmpty = true;
     let untilValue = "";
+    let isTdPlaying = false;
 
     if (data.length === 0) {
         untilValue = "toute la journée"
     }
 
+    data.sort(function(a,b){
+        return new Date(a.date) - new Date(b.date);
+    });
+
     data.map((elem, index) => {
         let start = new Date(elem.day +" "+ elem.heureDebut);
         let end = new Date(elem.day +" "+ elem.heureFin);
-
-        let isTdPlaying = ( (start <= currentDate) && (end > currentDate) );
+        
+        if ( (start <= currentDate) && (end > currentDate) ) {
+            isTdPlaying = true;
+        }
 
         if (isTdPlaying) {
             isEmpty = false;
-        } 
+        } else {
+            
+        }
 
         if (start > currentDate && untilValue === "") {
             untilValue = "jusqu'à "+data[index].heureDebut;
         }
         else if (index+1 > data.length-1 && untilValue === "") {
-            untilValue = "toute la journée";
+            untilValue = "jusqu'à fermeture";
         }
     })
     return { batiment: batiment, room: room, empty: isEmpty, until: isEmpty ? untilValue : "" };

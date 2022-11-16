@@ -25,8 +25,6 @@ export default function FindRoom() {
   useEffect(() => {
     if (data.length === dataSize) {
       setFindRoom(data);
-      console.log("---------------------------")
-      data.map(item => console.log(item))
     }
   }, [data])
 
@@ -81,22 +79,37 @@ export default function FindRoom() {
         <Header theme={theme} setBatiment={setBatiment} batiment={batiment} getAllRoom={fetchSelectedRoom}/>
       </View>
       <View style={[{ backgroundColor: theme.classic.background }, styles.mainContainer]}>
-        <View style={{ marginBottom: 10}}>
-          <Text style={{ fontSize: 30, fontWeight: "200"}}>Résultat:</Text>
+        <View style={styles.headerScrollList}>
+          <Text style={{ fontSize: 30, fontWeight: "200"}}>Salles disponibles</Text>
         </View>
+        <View style={[{ backgroundColor: "#e2e2e2", height: 1, width: "100%", }]}/>
         <ScrollView contentContainerStyle={{ flexGrow: 1, alignItems: 'center' }} style={{ flex: 1, paddingBottom:  0, width: "100%"}}>
           <View style={{ paddingBottom: 500}}>
             {allBatiments.map((bat, index) => {
               let numberRooms = findRoom.filter(item => item.batiment === bat && item.empty === true).length;
-              console.log(numberRooms)
               return(
                 <React.Fragment key={index}>
+
                   {numberRooms !== 0 && 
                     <View style={styles.titleContainer}>
                       <Text style={{ fontSize: 25, fontWeight: '300' }}>{bat}</Text>
                       <Text style={{ fontSize: 15, fontWeight: '200' }}> - {numberRooms} salle{numberRooms !== 1 ? "s" : ""} disponible{numberRooms !== 1 ? "s" : ""}</Text>
                     </View>}
-                  <BatimentRoomList data={findRoom} bat={bat} theme={theme}/>
+                  <View style={[{ width: "100%" }, styles.shadow]}>
+                    <BatimentRoomList data={findRoom} bat={bat} theme={theme}/>  
+                  </View>
+
+                  {isSunday() && index === 0 &&
+                  <View style={{ flex :1, justifyContent: "center" }}>
+                    <Text>UFR des Sciences est fermé le dimanche</Text>
+                  </View>
+                  }
+                  
+                  {!isSunday() && index === 0 && numberRooms === 0 &&
+                  <View style={{ flex :1, justifyContent: "center", alignItems: "center" }}>
+                    <Text>Pas de salle disponible...</Text>
+                  </View>
+                  }
                 </React.Fragment> 
               );
             })}
@@ -155,7 +168,6 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     backgroundColor: "#f2f2f2",
     alignItems: 'center',
-    paddingTop: "5%"
   },
   roomContainer: {
     height: 40,
@@ -204,5 +216,13 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
     shadowRadius: 5,
   },
+  headerScrollList: {
+    backgroundColor: "white", 
+    width: "100%", 
+    padding: 20,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    alignItems: "center"
+  }
   
 });
