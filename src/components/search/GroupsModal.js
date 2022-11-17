@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, TouchableOpacity, TextInput, Keyboard, Pressabl
 import { Ionicons } from '@expo/vector-icons';
 import axios, * as others from 'axios';
 
+import GroupItem from "./PureComponentGroup.js"
+
 const GroupsModal = (props) => {
 
   const [searchDataGroups, setSearchDataGroups] = useState([])
@@ -13,7 +15,6 @@ const GroupsModal = (props) => {
 
   useEffect(() => {
     fetchGroups("new");
-    console.log("attention")
   }, [currentSearch])
 
   async function fetchGroups(type) {
@@ -38,7 +39,6 @@ const GroupsModal = (props) => {
         if (type === "new") {
           setSearchDataGroups(result.results);
         } else if (type === "add") {
-          console.log("GOOOOD " + number)
           setSearchDataGroups(searchDataGroups.concat(result.results));
         }
     })
@@ -48,7 +48,7 @@ const GroupsModal = (props) => {
     });
   }
 
-  function fetchMoreData() {
+  const fetchMoreData = () => {
     if (totalGroup > searchDataGroups.length) {
       fetchGroups("add")
     }
@@ -60,9 +60,10 @@ const GroupsModal = (props) => {
   }
 
   const addGroup = (code, name) => {
-    console.log("add : "+ code);
     let isExist = false;
-    props.listGroup.map(item => { if (item.code === code) { isExist = true; }})
+
+    props.listGroup.map(item => { if (item.code === code) { isExist = true; }});
+
     if (!isExist) {
       props.setListGroup(oldArray => [...oldArray, { "code": code, "name": name }]);
     }
@@ -85,18 +86,11 @@ const GroupsModal = (props) => {
 
   return (
     <Modal
-      hasBackdrop={true}
-      backdropOpacity={0.5}
-      backdropColor="black"
       animationType="slide"
       transparent={true}
       onRequestClose={() => props.toggleModal() }
       onBackdropPress={() => props.toggleModal() }
       onSwipeComplete={() => props.toggleModal() }
-      backdropTransitionOutTiming={0}
-      useNativeDriverForBackdrop
-      swipeDirection={['down']}
-      backdropTransitionInTiming={2000}
       animationIn="zoomInDown"
       visible={props.modalGroups}
       style={{ margin: 0 }}>
@@ -127,6 +121,7 @@ const GroupsModal = (props) => {
               <View style={{ height: "100%", width: "100%" }}>
                 {currentSearch.length > 0 && 
                 <FlatList
+                  initialNumToRender={7}
                   data={ searchDataGroups }
                   renderItem={({item}) => { return ( <GroupItem name={item.text} code={item.id} theme={props.theme} addGroup={addGroup}/>) }}  
                   keyExtractor={(item, index) => index}
@@ -149,18 +144,6 @@ const GroupsModal = (props) => {
         </Pressable>
       </View>
     </Modal>
-  );
-}
-
-const GroupItem = (props) => {
-  return(
-    <>
-      <TouchableOpacity style={[{backgroundColor: props.theme.classic.foreground}, styles.buttonGroup, styles.shadow]}
-      onPress={() => props.addGroup(props.code, props.name)}>
-        <Text style={[{color: props.theme.classic.textDark}]}>{props.name}</Text>
-      </TouchableOpacity>
-      <View style={styles.line}/>
-    </>
   );
 }
 
@@ -313,3 +296,21 @@ export default GroupsModal;
       }
     }
     setSearchDataGroups(output);*/
+
+/*
+hasBackdrop={true}
+      backdropOpacity={0.5}
+      backdropColor="black"
+      animationType="slide"
+      transparent={true}
+      onRequestClose={() => props.toggleModal() }
+      onBackdropPress={() => props.toggleModal() }
+      onSwipeComplete={() => props.toggleModal() }
+      backdropTransitionOutTiming={0}
+      useNativeDriverForBackdrop
+      swipeDirection={['down']}
+      backdropTransitionInTiming={2000}
+      animationIn="zoomInDown"
+      visible={props.modalGroups}
+      style={{ margin: 0 }}>
+*/

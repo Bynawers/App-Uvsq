@@ -24,7 +24,10 @@ export default function FindRoom() {
 
   useEffect(() => {
     if (data.length === dataSize) {
-      setFindRoom(data);
+      const sorted = [...data].sort((a, b) => {
+        return b.room < a.room;
+      });  
+      setFindRoom(sorted);
     }
   }, [data])
 
@@ -65,6 +68,7 @@ export default function FindRoom() {
     
     batiment.map(batiment => {
       room[batiment].map(item => {
+        console.log(item)
         getRoom(item, batiment);
       })
     })
@@ -80,7 +84,7 @@ export default function FindRoom() {
       </View>
       <View style={[{ backgroundColor: theme.classic.background }, styles.mainContainer]}>
         <View style={styles.headerScrollList}>
-          <Text style={{ fontSize: 30, fontWeight: "200"}}>Salles disponibles</Text>
+          <Text style={{ fontSize: 25, fontWeight: "200"}}>Salles disponibles</Text>
         </View>
         <View style={[{ backgroundColor: "#e2e2e2", height: 1, width: "100%", }]}/>
         <ScrollView contentContainerStyle={{ flexGrow: 1, alignItems: 'center' }} style={{ flex: 1, paddingBottom:  0, width: "100%"}}>
@@ -105,7 +109,7 @@ export default function FindRoom() {
                   </View>
                   }
                   
-                  {!isSunday() && index === 0 && numberRooms === 0 &&
+                  {!isSunday() && index === 0 && allBatiments.length === 0 &&
                   <View style={{ flex :1, justifyContent: "center", alignItems: "center" }}>
                     <Text>Pas de salle disponible...</Text>
                   </View>

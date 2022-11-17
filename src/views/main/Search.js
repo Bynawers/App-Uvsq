@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Ionicons, Feather } from '@expo/vector-icons';
-import { StyleSheet, SafeAreaView, View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, SafeAreaView, View, Text, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import axios, * as others from 'axios';
 
@@ -193,40 +193,39 @@ export default function Search({navigation}) {
     <View style={[{ backgroundColor: theme.classic.primary }, styles.safeAreaStyle]}>
       <View style={[{ backgroundColor: theme.classic.primary }, styles.backgroundContainer]}>
         
-        <View style={{ height: "15%", alignItems: "center", alignSelf: "center"}}>
+        <View style={styles.headerContainer}>
           <Header theme={theme} toggleType={toggleType} setToggleType={setToggleType} todayDate={refreshDateRendering}/>
         </View>
 
         <View style={[ { backgroundColor: theme.classic.foreground }, styles.foregroundContainer]}>
+
           <View style={styles.selectContainer}>
-            <TouchableOpacity style={{ marginLeft: '10%', padding: 10}} onPress={() => refreshDateRendering(toggleType === "day" ? -1 : -7)}>
+            <TouchableOpacity style={styles.chevronButton} onPress={() => refreshDateRendering(toggleType === "day" ? -1 : -7)}>
               <Feather name="chevron-left" size={35} color={theme.classic.textDark}/>
             </TouchableOpacity>
             <TouchableOpacity style={styles.dateContainer}>
               <Text style={[{color: theme.classic.textDark}, styles.textDay]}>{day}</Text>
               <Text style={[{color: theme.classic.textDark}, styles.textDate]}>{date}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={{ marginRight: '10%', padding: 10}} onPress={() => refreshDateRendering(toggleType === "day" ? 1 : 7)}>
+            <TouchableOpacity style={styles.chevronButton} onPress={() => refreshDateRendering(toggleType === "day" ? 1 : 7)}>
               <Feather name="chevron-right" size={35} color={theme.classic.textDark}/>
             </TouchableOpacity>
           </View>
 
-          <View style={{ marginLeft: 10, marginBottom: groupListVisible ? 0 : 10 }}>
-            <TouchableOpacity style={{ flexDirection: "row", alignItems: "center" }} onPress={() => setGroupListVisible(!groupListVisible)}>
+          <View style={{ marginBottom: groupListVisible ? 0 : 10 }}>
+            <TouchableOpacity style={{ flexDirection: "row", alignItems: "center", marginLeft: 10 }} onPress={() => setGroupListVisible(!groupListVisible)}>
               <Text style={{ fontSize: 20, fontWeight: "300", marginRight: 10 }}>Mes groupes</Text>
             </TouchableOpacity>
             {groupListVisible &&
             <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <TouchableOpacity style={styles.addGroups} onPress={() => toggleModal()}>
-                <Ionicons name="add" color={theme.classic.textDark} size={35}/>
-              </TouchableOpacity>
-              {listGroup.map((item, index) => {
-                return(
-                  <React.Fragment key={index}>
-                    <GroupElement code={item.code} theme={theme} setGroup={setGroup} group={group}/>
-                  </React.Fragment>
-                );
-              })}
+              <FlatList
+                horizontal
+                initialNumToRender={7}
+                data={ listGroup }
+                renderItem={({item}) => { return ( <GroupElement code={item.code} theme={theme} setGroup={setGroup} group={group}/>) }}  
+                keyExtractor={(item, index) => index}
+                ListHeaderComponent={<FooterGroupList toggleModal={toggleModal} theme={theme}/>}/>
+              
             </View>}
           </View>
           
@@ -266,9 +265,19 @@ export default function Search({navigation}) {
 
 const GroupElement = (props) => {
   return(
-    <TouchableOpacity style={[{ backgroundColor: props.group === props.code ? props.theme.classic.secondary : "#f2f2f2" }, styles.buttonGroup, styles.shadow]}
-    onPress={() => { props.setGroup(props.code); }}>
-      <Text style={{color: props.group === props.code ? props.theme.classic.textLight : props.theme.classic.textDark}}>{props.code}</Text>
+    <View style={{ flex: 1, justifyContent: "center", marginRight: 10 }}>
+      <TouchableOpacity style={[{ backgroundColor: props.group === props.code ? props.theme.classic.secondary : "#f2f2f2" }, styles.buttonGroup, styles.shadow]}
+      onPress={() => { props.setGroup(props.code); }}>
+        <Text style={{color: props.group === props.code ? props.theme.classic.textLight : props.theme.classic.textDark}}>{props.code}</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+const FooterGroupList = (props) => {
+  return(
+    <TouchableOpacity style={styles.addGroups} onPress={() => props.toggleModal()}>
+      <Ionicons name="add" color={props.theme.classic.textDark} size={35}/>
     </TouchableOpacity>
   );
 }
@@ -342,6 +351,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   buttonGroup: {
+    height: 30,
     paddingTop: 5,
     paddingBottom: 5,
     paddingLeft: 15,
@@ -349,11 +359,19 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
-    marginRight: 10
   },
   titleDay: {
     fontSize: 15,
     marginTop: 10,
     fontWeight: '600'
+  },
+  headerContainer: {
+    height: "15%", 
+    alignItems: "center", 
+    alignSelf: "center"
+  },
+  chevronButton: {
+    marginLeft: '10%', 
+    padding: 10
   }
 });
