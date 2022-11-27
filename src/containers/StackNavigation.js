@@ -5,7 +5,7 @@ import Home from "../views/main/Home.js"
 import Search from "../views/main/Search.js";
 import FindRoom from "../views/main/FindRoom.js";
 
-import Group from "../views/secondary/Group.js"
+import Detail from "../views/secondary/UEDetail"
 
 
 const Stack = createStackNavigator();
@@ -30,7 +30,7 @@ const SearchStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="SearchStack" component={Search}/>
-      <Stack.Screen name="GroupStack" component={Group}/>
+      <Stack.Screen name="DetailStack" component={Detail}/>
     </Stack.Navigator>
   );
 }

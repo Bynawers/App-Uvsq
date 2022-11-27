@@ -74,10 +74,10 @@ const styles = StyleSheet.create({
     paddingRight : "5%",
   },
   notificationContainer: {
-    height: 100,
+    paddingBottom: 20,
     backgroundColor: "white",
     width: "100%",
-    borderRadius: 20,
+    borderRadius: 15,
     padding : 10,
     marginTop: 10
   }

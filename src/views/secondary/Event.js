@@ -8,7 +8,7 @@ export default function Event({ navigation }) {
 
   const theme = useTheme();
 
-  const data = require("../../data/event.json");
+  const data = require("../../data/notification.json");
 
   return (
     <View style={[{ backgroundColor: theme.classic.primary }, styles.mainContainer]}>

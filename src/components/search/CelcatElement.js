@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, Pressable } from 'react-native';
+import * as Haptics from 'expo-haptics';
 
 const CelcatElement = (props) => {
 
@@ -14,9 +15,15 @@ const CelcatElement = (props) => {
     props.type === "TD Cartable Numérique" ? '#FDE6AD' : 
     props.type === "TP" ? "#81FF7A" :
     props.type === "Contrôle continu" ? "#FEA9FE" : "pink";
+
+    const openDetail = () => {
+      props.navigation.navigate("DetailStack", { type: props.type, course: props.course, room: props.room, group: props.group });
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+    }
   
     return(
-      <View style={[{  backgroundColor: background, height: heightElement, flexShrink: 1 }, styles.shadow, styles.celcatElementContainer ]}>
+      <Pressable style={[{  backgroundColor: background, height: heightElement }, styles.shadow, styles.celcatElementContainer ]}
+      onLongPress={() => openDetail()}>
         <Text style={{ flexShrink: 1}}>
             <Text style={{ fontWeight: "500" }}>{props.dateStart} - {props.dateEnd} - {props.type}{"\n"}</Text>
             <Text style={{ fontWeight: "500" }}>Cours : </Text>
@@ -26,13 +33,13 @@ const CelcatElement = (props) => {
             <Text style={{ fontWeight: "500" }}>Groupe : </Text>
             <Text style={{ flexShrink: 1, fontWeight: "300" }}>{props.group}</Text>
         </Text>
-      </View>
+      </Pressable>
     );
   }
 
 const styles = StyleSheet.create({
     celcatElementContainer: { 
-        width: "85%",  
+        width: "90%",  
         borderRadius: 20, 
         borderWidth: 1, 
         borderColor: "#858585", 

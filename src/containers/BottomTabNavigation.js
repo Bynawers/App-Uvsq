@@ -14,14 +14,14 @@ export default function MyTabs() {
 
     return (
     <Tab.Navigator
-      initialRouteName="HomeBottom"
+      initialRouteName="Accueil"
       screenOptions={({ route }) =>({
 
         tabBarIcon: ({ focused, color, size }) => {
             let iconName;
             let rn = route.name;
 
-            if (rn === "HomeBottom") {
+            if (rn === "Accueil") {
               iconName = focused ? 'home' : 'home-outline';
             } 
             else if (rn === "CELCAT") {
@@ -30,7 +30,7 @@ export default function MyTabs() {
             else if (rn === "FindRoom") {
               iconName = focused ? 'ios-search' : 'search-outline';
             }
-            return <Ionicons name={iconName} size={35} color={color} />;
+            return <Ionicons name={iconName} size={30} color={color} />;
         },
         headerShown: false,
         tabBarActiveTintColor: theme.classic.textDark,
@@ -47,7 +47,7 @@ export default function MyTabs() {
         })}>
 
       <Tab.Screen
-        name="HomeBottom"
+        name="Accueil"
         component={ HomeStackNavigator }
       />
       <Tab.Screen

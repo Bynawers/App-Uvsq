@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, SafeAreaView, View, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import axios, * as others from 'axios';
@@ -14,13 +14,26 @@ export default function FindRoom() {
   const theme = useTheme();
 
   const room = require("../../data/room.json");
-  const example = require("../../data/roomExample.json");
   const allBatiments = ["FERMAT", "BUFFON", "GERMAIN", "DESCARTES" ];
 
+  const [isClose, setIsClose] = useState(false);
   const [batiment, setBatiment] = useState(["FERMAT"]);
   const [dataSize, setDataSize] = useState(0);
   const [data, setData] = useState([]);
   const [findRoom, setFindRoom] = useState([]);
+
+  useEffect(() => {
+    let currentDate = new Date("2022/11/24 17:00");
+    let facStart = new Date(currentDate.toISOString().slice(0, 10).replaceAll("-", "/")+ " 07:30");
+    let facEnd = new Date(currentDate.toISOString().slice(0, 10).replaceAll("-", "/")+ " 19:00");
+    if (currentDate < facStart || currentDate > facEnd) {
+      setIsClose(true);
+    } else if (isSunday()) {
+      setIsClose(true);
+    } else {
+      setIsClose(false);
+    }
+  });
 
   useEffect(() => {
     if (data.length === dataSize) {
@@ -32,7 +45,10 @@ export default function FindRoom() {
   }, [data])
 
   function getRoom(room, batiment) {
-    let date = new Date();
+
+    if (isClose) { return; }
+
+    let date = new Date("2022/11/24 17:00");
     let url = 'https://edt.uvsq.fr/Home/GetCalendarData'
     let data = { 'start':date,'end':date,'resType':'102','calView':'agendaDay','federationIds[]':room }
 
@@ -88,30 +104,31 @@ export default function FindRoom() {
         </View>
         <View style={[{ backgroundColor: "#e2e2e2", height: 1, width: "100%", }]}/>
         <ScrollView contentContainerStyle={{ flexGrow: 1, alignItems: 'center' }} style={{ flex: 1, paddingBottom:  0, width: "100%"}}>
-          <View style={{ paddingBottom: 500}}>
+          <View style={{ paddingBottom: 500 }}>
             {allBatiments.map((bat, index) => {
               let numberRooms = findRoom.filter(item => item.batiment === bat && item.empty === true).length;
               return(
                 <React.Fragment key={index}>
 
-                  {numberRooms !== 0 && 
+                  {!isClose && numberRooms !== 0 && 
                     <View style={styles.titleContainer}>
                       <Text style={{ fontSize: 25, fontWeight: '300' }}>{bat}</Text>
                       <Text style={{ fontSize: 15, fontWeight: '200' }}> - {numberRooms} salle{numberRooms !== 1 ? "s" : ""} disponible{numberRooms !== 1 ? "s" : ""}</Text>
                     </View>}
+                  {!isClose && 
                   <View style={[{ width: "100%" }, styles.shadow]}>
                     <BatimentRoomList data={findRoom} bat={bat} theme={theme}/>  
-                  </View>
-
-                  {isSunday() && index === 0 &&
-                  <View style={{ flex :1, justifyContent: "center" }}>
-                    <Text>UFR des Sciences est fermé le dimanche</Text>
-                  </View>
-                  }
+                  </View>}
                   
                   {!isSunday() && index === 0 && allBatiments.length === 0 &&
                   <View style={{ flex :1, justifyContent: "center", alignItems: "center" }}>
                     <Text>Pas de salle disponible...</Text>
+                  </View>
+                  }
+
+                  {isClose && index === 0 &&
+                  <View style={{ flex :1, justifyContent: "center", alignItems: "center" }}>
+                    <Text>L'UFR Des Sciences est fermé</Text>
                   </View>
                   }
                 </React.Fragment> 

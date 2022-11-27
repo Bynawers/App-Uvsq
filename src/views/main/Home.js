@@ -56,7 +56,7 @@ const LinkContainer = (props) => {
       <View style={styles.linkContainer}>
         <TouchableOpacity style={[styles.shadow, styles.linkButton]}
         onPress={() => openUrl(props.url)}>
-          <Image style={{ height: "100%", width: "100%", borderRadius: 15 }} source={props.image}/>
+          <Image style={styles.image} source={props.image}/>
         </TouchableOpacity>
         <Text>{props.name}</Text>
       </View>
@@ -80,10 +80,6 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center"
   },
-  safeAreaStyme: {
-    alignItems: 'center', 
-    flex: 1
-  },
   mainContainer: {
     height: "100%",
     width: "100%",
@@ -101,21 +97,6 @@ const styles = StyleSheet.create({
     width: "100%", 
     alignItems: "center", 
     justifyContent: "center"
-  },
-  title: {
-    fontWeight: "100",
-    fontSize: 25,
-  },
-  line: {
-    width: "80%",
-    height: 100,
-    color: "red"
-  },
-  subTitle: {
-    fontSize: 20,
-    fontWeight: "300",
-    paddingLeft: "10%",
-    marginBottom: 10
   },
   contentAppContainer: {
     backgroundColor: "white",
@@ -138,26 +119,33 @@ const styles = StyleSheet.create({
     marginRight: "5%",
     paddingLeft: "5%",
     paddingRight: "5%"
-    
-  },
-  shadow: {
-    shadowColor: '#171717',
-    shadowOffset: {width: 0, height: 3},
-    shadowOpacity: 0.4,
-    shadowRadius: 4,
   },
   linkContainer: {
     width: 100, 
     alignItems: "center", 
   },
-  linkButton: {
-    width: 100, 
-    height: 100,
-  },
   dossierContainer: {
     width: "90%",
     height: 50,
     justifyContent: "center"
+  },
+
+  title: {
+    fontWeight: "100",
+    fontSize: 25,
+  },
+  subTitle: {
+    fontSize: 20,
+    fontWeight: "300",
+    paddingLeft: "10%",
+    marginBottom: 10
+  },
+
+  shadow: {
+    shadowColor: '#171717',
+    shadowOffset: {width: 0, height: 3},
+    shadowOpacity: 0.4,
+    shadowRadius: 4,
   },
   line: {
     height: 1,
@@ -165,6 +153,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#D8D8D8",
     position: "absolute",
     bottom: 0
-  }
-  
+  },
+  image: {
+    height: "100%", 
+    width: "100%", 
+    borderRadius: 15
+  },
+
+  linkButton: {
+    width: 100, 
+    height: 100,
+  },
 });

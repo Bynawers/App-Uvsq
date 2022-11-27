@@ -160,9 +160,9 @@ const MyGroupsItem = (props) => {
         <View style={{ flex: 1 }}>
           <Text style={[{color: isValue ? props.theme.classic.textLight : props.theme.classic.textDark}]}>{props.code}</Text>
         </View>
-        <TouchableOpacity style={{ flex: .2}}
+        <TouchableOpacity style={{ flex: .15}}
         onPress={() => {props.deleteGroup(props.code)}}>
-          <Ionicons name="close" color={isValue ? props.theme.classic.textLight : props.theme.classic.textDark} size={30}/>
+          <Ionicons name="ios-trash-outline" color={isValue ? props.theme.classic.textLight : props.theme.classic.textDark} size={20}/>
         </TouchableOpacity>
       </TouchableOpacity>
     </>

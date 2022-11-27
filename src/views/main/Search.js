@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView, FlatList } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons, Feather } from '@expo/vector-icons';
-import { StyleSheet, SafeAreaView, View, Text, TouchableOpacity, ScrollView, FlatList } from 'react-native';
-import * as Haptics from 'expo-haptics';
 import axios, * as others from 'axios';
 
 import { useTheme } from 'react-native-paper';
@@ -20,8 +20,8 @@ export default function Search({navigation}) {
   const [toggleType, setToggleType] = useState("day");
   const [pageLoad, setPageLoad] = useState(false);
   const [sorted, isSorted] = useState(false);
-  const [date, setDate] = useState("7 septembre");
-  const [day, setDay] = useState("lundi");
+  const [date, setDate] = useState("");
+  const [day, setDay] = useState("");
   const [currentDate, setCurrentDate] = useState(new Date());
   const [timetable, setTimetable] = useState([]);
 
@@ -30,12 +30,38 @@ export default function Search({navigation}) {
 
   let dateWeekDisplay = true;
 
+  const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value)
+      await AsyncStorage.setItem('searchStore', jsonValue)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('searchStore')
+      console.log(JSON.parse(jsonValue).list)
+      console.log(JSON.parse(jsonValue).selected)
+      setListGroup(jsonValue.list != [] ? JSON.parse(jsonValue).list : [])
+      setGroup(jsonValue.selected != "" ? JSON.parse(jsonValue).selected : "")
+    } catch(e) {
+      console.log(e)
+    }
+  }
+
   const onPageLoad = () => {
     if (pageLoad === true) { return }
     setPageLoad(true); 
+    getData();
     todayDate();
     getTimeTable();
   }
+
+  useEffect(() => {
+    let saveValue = { selected: group, list: listGroup }
+    storeData(saveValue);
+  }, [listGroup, group])
 
   useEffect(() => {
     refreshDateRendering(0);
@@ -66,7 +92,6 @@ export default function Search({navigation}) {
 
   const toggleModal = () => {
     setModalGroups(!modalGroups);
-    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
   }
   const todayDate = () => {
     setCurrentDate(new Date());
@@ -190,7 +215,7 @@ export default function Search({navigation}) {
   onPageLoad();
 
   return (
-    <View style={[{ backgroundColor: theme.classic.primary }, styles.safeAreaStyle]}>
+    <View style={[{ backgroundColor: theme.classic.primary }, styles.mainContainer]}>
       <View style={[{ backgroundColor: theme.classic.primary }, styles.backgroundContainer]}>
         
         <View style={styles.headerContainer}>
@@ -200,14 +225,14 @@ export default function Search({navigation}) {
         <View style={[ { backgroundColor: theme.classic.foreground }, styles.foregroundContainer]}>
 
           <View style={styles.selectContainer}>
-            <TouchableOpacity style={styles.chevronButton} onPress={() => refreshDateRendering(toggleType === "day" ? -1 : -7)}>
+            <TouchableOpacity style={styles.buttonChevronLeft} onPress={() => refreshDateRendering(toggleType === "day" ? -1 : -7)}>
               <Feather name="chevron-left" size={35} color={theme.classic.textDark}/>
             </TouchableOpacity>
             <TouchableOpacity style={styles.dateContainer}>
               <Text style={[{color: theme.classic.textDark}, styles.textDay]}>{day}</Text>
               <Text style={[{color: theme.classic.textDark}, styles.textDate]}>{date}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.chevronButton} onPress={() => refreshDateRendering(toggleType === "day" ? 1 : 7)}>
+            <TouchableOpacity style={styles.buttonChevronRight} onPress={() => refreshDateRendering(toggleType === "day" ? 1 : 7)}>
               <Feather name="chevron-right" size={35} color={theme.classic.textDark}/>
             </TouchableOpacity>
           </View>
@@ -232,8 +257,8 @@ export default function Search({navigation}) {
           <View style={ styles.line }/>
 
           <View style={{ flex: 1, backgroundColor: '#f2f2f2' }}>
-            <ScrollView style={[{ backgroundColor: "#f2f2f2" }, styles.timetableContainer]} contentContainerStyle={{ paddingBottom: 200 }}>
-              <View style={{ alignItems: "center" }}>
+            <ScrollView contentContainerStyle={{ flexGrow: 1, alignItems: 'center' }} style={{ flex: 1, paddingBottom:  0, width: "100%" }}>
+              <View style={{ alignItems: "center", paddingBottom: 300 }}>
                 {timetable.map((item, index) => {
 
                   let date = new Date(item.date);
@@ -244,8 +269,8 @@ export default function Search({navigation}) {
                   }
                   return(
                     <React.Fragment key={index}>
-                      {toggleType === "week" && dateWeekDisplay && <Text style={styles.titleDay}>{dateToString(date, "day")} {date.getDate()} {dateToString(date, "month")} {date.getFullYear()}</Text>}
-                      <CelcatElement time={1.5} course={item.matiere} group={item.groupe} room={item.salle} type={item.type} dateStart={item.heureDebut} dateEnd={item.heureFin} day={item.day}/>
+                      {toggleType === "week" && dateWeekDisplay && <Text style={styles.textTitleDay}>{dateToString(date, "day")} {date.getDate()} {dateToString(date, "month")} {date.getFullYear()}</Text>}
+                      <CelcatElement navigation={navigation} time={1.5} course={item.matiere} group={item.groupe} room={item.salle} type={item.type} dateStart={item.heureDebut} dateEnd={item.heureFin} day={item.day}/>
                     </React.Fragment>
                   );
                 })}
@@ -276,7 +301,7 @@ const GroupElement = (props) => {
 
 const FooterGroupList = (props) => {
   return(
-    <TouchableOpacity style={styles.addGroups} onPress={() => props.toggleModal()}>
+    <TouchableOpacity style={styles.buttonAddGroups} onPress={() => props.toggleModal()}>
       <Ionicons name="add" color={props.theme.classic.textDark} size={35}/>
     </TouchableOpacity>
   );
@@ -289,17 +314,10 @@ Date.prototype.addDays = function(days) {
 }
 
 const styles = StyleSheet.create({
-  safeAreaStyle: {
+  mainContainer: {
     justifyContent: 'center', 
     alignItems: 'center', 
     flex: 1,
-
-  },
-  shadow: {
-    shadowColor: '#171717',
-    shadowOffset: {width: 0, height: 3},
-    shadowOpacity: 0.4,
-    shadowRadius: 2,
   },
   backgroundContainer: {
     height: "100%",
@@ -312,14 +330,31 @@ const styles = StyleSheet.create({
     marginTop: "7%",
     borderRadius: 50,
   },
-  text: {
-    fontSize: 15,
-  },
   selectContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: 'center',
     height: "10%",
+  },
+  dateContainer: {
+    alignItems: 'center'
+  },
+  timetableContainer: {
+    flex: 1,
+    width: "100%",
+  },
+  bottomContainer: {
+    flex: 1,
+    width: "100%",
+  },
+  headerContainer: {
+    height: "15%", 
+    alignItems: "center", 
+    alignSelf: "center"
+  },
+
+  text: {
+    fontSize: 15,
   },
   textDay: {
     fontSize: 25,
@@ -329,26 +364,16 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '100',
   },
-  dateContainer: {
-    alignItems: 'center'
-  },
-  line: {
-    height: 1,
-    width: "100%",
-    backgroundColor: "#e2e2e2"
-  },
-  addGroups: {
-    padding: 10,
-    alignSelf: 'flex-start'
+  textTitleDay: {
+    fontSize: 15,
+    marginTop: 10,
+    fontWeight: '600'
   },
 
-  timetableContainer: {
-    flex: 1,
-    width: "100%",
-  },
-  bottomContainer: {
-    flex: 1,
-    width: "100%",
+
+  buttonAddGroups: {
+    padding: 10,
+    alignSelf: 'flex-start'
   },
   buttonGroup: {
     height: 30,
@@ -360,18 +385,24 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  titleDay: {
-    fontSize: 15,
-    marginTop: 10,
-    fontWeight: '600'
-  },
-  headerContainer: {
-    height: "15%", 
-    alignItems: "center", 
-    alignSelf: "center"
-  },
-  chevronButton: {
+  buttonChevronLeft: {
     marginLeft: '10%', 
     padding: 10
-  }
+  },
+  buttonChevronRight: {
+    marginRight: '10%', 
+    padding: 10
+  },
+
+  shadow: {
+    shadowColor: '#171717',
+    shadowOffset: {width: 0, height: 3},
+    shadowOpacity: 0.4,
+    shadowRadius: 2,
+  },
+  line: {
+    height: 1,
+    width: "100%",
+    backgroundColor: "#e2e2e2"
+  },
 });
