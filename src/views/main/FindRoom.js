@@ -17,7 +17,7 @@ export default function FindRoom() {
   const allBatiments = ["FERMAT", "BUFFON", "GERMAIN", "DESCARTES" ];
 
   const [isClose, setIsClose] = useState(false);
-  const [batiment, setBatiment] = useState(["FERMAT"]);
+  const [batiment, setBatiment] = useState("");
   const [dataSize, setDataSize] = useState(0);
   const [data, setData] = useState([]);
   const [findRoom, setFindRoom] = useState([]);
@@ -44,11 +44,16 @@ export default function FindRoom() {
     }
   }, [data])
 
+  useEffect(() => {
+    console.log("fetch data..");
+    fetchSelectedRoom();
+  }, [batiment])
+
   function getRoom(room, batiment) {
 
     if (isClose) { return; }
 
-    let date = new Date("2022/11/24 17:00");
+    let date = new Date();
     let url = 'https://edt.uvsq.fr/Home/GetCalendarData'
     let data = { 'start':date,'end':date,'resType':'102','calView':'agendaDay','federationIds[]':room }
 
@@ -73,7 +78,11 @@ export default function FindRoom() {
   function fetchSelectedRoom() {
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     let size = 0;
-    batiment.map(item => { size += room[item].length })
+
+    if (batiment === "") { return }
+
+    size = room[batiment].length;
+    console.log(size);
 
     setDataSize(size)
     setData([]);
@@ -82,13 +91,13 @@ export default function FindRoom() {
       return;
     }
     
-    batiment.map(batiment => {
-      room[batiment].map(item => {
-        console.log(item)
-        getRoom(item, batiment);
-      })
+    room[batiment].map(item => {
+      console.log(item)
+      getRoom(item, batiment);
     })
   }
+
+
   function isSunday(date = new Date()) {
     return date.getDay() % 7 === 0;
   }
@@ -96,7 +105,7 @@ export default function FindRoom() {
   return (
     <View style={[{ backgroundColor: theme.classic.primary }]}>
       <View style={[{ backgroundColor: theme.classic.primary }, styles.backgroundContainer]}>
-        <Header theme={theme} setBatiment={setBatiment} batiment={batiment} getAllRoom={fetchSelectedRoom}/>
+        <Header theme={theme} setBatiment={setBatiment} batiment={batiment} fetchSelectedRoom={fetchSelectedRoom}/>
       </View>
       <View style={[{ backgroundColor: theme.classic.background }, styles.mainContainer]}>
         <View style={styles.headerScrollList}>
@@ -105,8 +114,10 @@ export default function FindRoom() {
         <View style={[{ backgroundColor: "#e2e2e2", height: 1, width: "100%", }]}/>
         <ScrollView contentContainerStyle={{ flexGrow: 1, alignItems: 'center' }} style={{ flex: 1, paddingBottom:  0, width: "100%"}}>
           <View style={{ paddingBottom: 500 }}>
+
             {allBatiments.map((bat, index) => {
               let numberRooms = findRoom.filter(item => item.batiment === bat && item.empty === true).length;
+
               return(
                 <React.Fragment key={index}>
 
@@ -134,6 +145,7 @@ export default function FindRoom() {
                 </React.Fragment> 
               );
             })}
+
           </View>
         </ScrollView>
       </View>
@@ -142,12 +154,31 @@ export default function FindRoom() {
 }
 
 const BatimentRoomList = (props) => {
+
+  let previousType = null;
+
+  const hasSameType = (current) => {
+    if (previousType === null) { 
+      return false; 
+    }
+    else if (previousType === current.type) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   return(
     <>
       {props.data.filter((item) => item.empty === true && item.batiment === props.bat).map((item, index, row) => {
+        let sameType = hasSameType(item);
+
+        previousType = item.type;
         return(
           <React.Fragment key={index}>
-            <RoomComponent room={item.room} until={item.until} theme={props.theme} first={index === 0 ? true : false} last={index + 1 === row.length ? true : false}/>
+            {!sameType && <TitleComponent type={item.type}/>}
+            <RoomComponent room={item.room} until={item.until} theme={props.theme} first={index === 0 ? true : false} last={index + 1 === row.length ? true : false} type={item.type}/>
           </React.Fragment>
         );
       })}
@@ -160,26 +191,34 @@ const RoomComponent = (props) => {
   let hasLine = !props.last;
 
   return(
-    <View style={[{ backgroundColor: "white", borderTopLeftRadius: props.first ? 20 : 0, borderTopRightRadius: props.first ? 20 : 0, borderBottomLeftRadius: props.last ? 20 : 0, borderBottomRightRadius: props.last ? 20 : 0 }, styles.roomContainer]}>
-      <View style={[{ backgroundColor: "#91CD6D", borderTopLeftRadius: props.first ? 20 : 0, borderBottomLeftRadius: props.last ? 20 : 0 }, styles.checkIndicator ]}>
+    <View style={[{ backgroundColor: "white" }, styles.roomContainer]}>
+      <View style={[{ backgroundColor: "#91CD6D" }, styles.checkIndicator ]}>
         <Ionicons name="checkmark" size={30} color="white"/>
         {hasLine && <View style={[{backgroundColor: "#7EBC59" }, styles.line]}/>}
       </View>
       <View style={styles.roomIndicator}>
-        <Text style={{ color: props.theme.classic.textDark, marginLeft: 10, fontSize: 10 }}>Salle {props.room}</Text>
+        <Text style={{ color: props.theme.classic.textDark, marginLeft: 10, fontSize: 10 }}>{ props.type !== "Amphithéatre" ? "Salle" : ""} {props.room}</Text>
         {hasLine && <View style={[{backgroundColor: "#E3E3E3" }, styles.line]}/>}
       </View>
-      <View style={[{ backgroundColor: "#0092BB", borderTopRightRadius: props.first ? 20 : 0, borderBottomRightRadius: props.last ? 20 : 0 }, styles.untilIndicator]}>
+      <View style={[{ backgroundColor: "#0092BB" }, styles.untilIndicator]}>
         <Text style={{ color: props.theme.classic.textLight, fontSize: 10 }}>{props.until}</Text>
         {hasLine && <View style={[{backgroundColor: "#0188AE" }, styles.line]}/>}
       </View>
     </View>
   );
 }
+const TitleComponent = (props) => {
+
+  return(
+    <View style={[styles.titleListContainer]}>
+      {<Text style={{ fontWeight: "200"}}>{props.type}</Text>}
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   backgroundContainer: {
-    height: "21%",
+    height: "16%",
     width: "100%",
     alignItems: "center",
   },
@@ -195,6 +234,13 @@ const styles = StyleSheet.create({
     width: "85%",
     flexDirection: "row",
     alignItems: "center"
+  },
+  titleListContainer: {
+    height: 40,
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingLeft: "5%"
   },
   checkIndicator: {
     height: "100%",

@@ -44,15 +44,18 @@ const Library = (props) => {
       <View style={styles.listContainer}>
         {props.data.map((item, index) => {     
           let currentDay = props.data[ getDayIndex() ].id === item.id; 
+          let isWeekend = item.id === "samedi" || item.id === "dimanche";
+          console.log(item)
           return(
             <React.Fragment key={index}>   
+              { !isWeekend &&
               <View style={[{ backgroundColor: currentDay ? props.theme.classic.foreground : props.theme.classic.primary }, styles.dayContainer]}>
                 <Text style={[{ color: currentDay ? props.theme.classic.textDark : props.theme.classic.textLight }, styles.textContent]}>{item.day}</Text>
                 <Text style={[{ color: currentDay ? props.theme.classic.textDark : props.theme.classic.textLight }, styles.textHour]}>{item.start}</Text>
                 <Text style={[{ color: currentDay ? props.theme.classic.textDark : props.theme.classic.textLight }, styles.textHour]}>-</Text>
                 <Text style={[{ color: currentDay ? props.theme.classic.textDark : props.theme.classic.textLight }, styles.textHour]}>{item.end}</Text>
                 {currentDay && <Text style={[{ color: isOpen ? "green" : "red" }, styles.textHour]}>{isOpen ? "OUVERT" : "FERME"}</Text>}
-              </View>
+              </View>}
             </React.Fragment>
           );
         })}

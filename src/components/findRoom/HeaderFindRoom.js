@@ -4,11 +4,11 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 const Header = (props) => {
 
   const toggleBatiment = (nameChange) => {
-    if (props.batiment.includes(nameChange)) {
-      props.setBatiment(prev => prev.filter(name => name !== nameChange ));
+    if (props.batiment === nameChange) {
+      props.setBatiment("");
     }
     else {
-      props.setBatiment(oldArray => [...oldArray, nameChange]);
+      props.setBatiment(nameChange);
     }
   }
 
@@ -21,18 +21,15 @@ const Header = (props) => {
         <BatimentButton name="GERMAIN" theme={props.theme} batiment={props.batiment} toggleBatiment={toggleBatiment}/>
         <BatimentButton name="DESCARTES" theme={props.theme} batiment={props.batiment} toggleBatiment={toggleBatiment}/>
       </View>
-      <TouchableOpacity style={[{ backgroundColor: "white" }, styles.selectFind ]} onPress={() => props.getAllRoom()}>
-        <Text style={{ fontSize: 15 }}>FIND</Text>
-      </TouchableOpacity>
     </View>
   );
 }
 
 const BatimentButton = (props) => {
   return(
-    <TouchableOpacity style={[{ backgroundColor: props.batiment.includes(props.name) ? props.theme.classic.secondary : props.theme.classic.foreground }, styles.selectButton ]}
+    <TouchableOpacity style={[{ backgroundColor: props.batiment === props.name ? props.theme.classic.secondary : props.theme.classic.foreground }, styles.selectButton ]}
     onPress={() => props.toggleBatiment(props.name)}>
-      <Text style={{ fontSize: 10, color: props.batiment.includes(props.name) ? props.theme.classic.textLight : props.theme.classic.textDark }}>{props.name}</Text>
+      <Text style={{ fontSize: 10, color: props.batiment === props.name ? props.theme.classic.textLight : props.theme.classic.textDark }}>{props.name}</Text>
     </TouchableOpacity>
   );
 }

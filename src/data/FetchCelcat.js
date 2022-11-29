@@ -45,7 +45,7 @@ function newCelcatEvent( string, dateStart, dateEnd ) {
 }
 
 export function isEmptyRoom(room, data, batiment) {
-    let currentDate = new Date("2022/11/10 12:00");
+    let currentDate = new Date();
     let isEmpty = true;
     let untilValue = "";
     let isTdPlaying = false;
@@ -79,5 +79,14 @@ export function isEmptyRoom(room, data, batiment) {
             untilValue = "jusqu'à fermeture";
         }
     })
-    return { batiment: batiment, room: room, empty: isEmpty, until: isEmpty ? untilValue : "" };
+    let secondFloorDescartes = ["ALSACE", "AQUITA", "ARCHIM", "BOURGO", "CENTRE", "JUNGLE"];
+
+    let type = room.startsWith("G0") || room.startsWith("RC") || room.startsWith("21") ? "Rez-de-chaussé"
+    : room.startsWith("G1") || room.startsWith("22") || room.startsWith("1") ? "Premier étage"
+    : room.startsWith("G2") || secondFloorDescartes.includes(room.substring(0, 6)) ? "Deuxième étage"
+    : room.startsWith("AMPHI") ? "Amphithéatre" : "None"
+
+    let newRoom = room.split('-');
+
+    return { batiment: batiment, room: newRoom[0], empty: isEmpty, until: isEmpty ? untilValue : "", type: type };
 }

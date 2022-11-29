@@ -29,6 +29,18 @@
             "day": "VEN",
             "start": "08:30",
             "end": "19:00"
+        },
+        {
+            "id": "samedi",
+            "day": "SAM",
+            "start": "",
+            "end": ""
+        },
+        {
+            "id": "dimanche",
+            "day": "DIM",
+            "start": "",
+            "end": ""
         }
     ],
     "school": [
@@ -61,6 +73,18 @@
             "day": "VEN",
             "start": "09:00",
             "end": "16:30"
+        },
+        {
+            "id": "samedi",
+            "day": "SAM",
+            "start": "",
+            "end": ""
+        },
+        {
+            "id": "dimanche",
+            "day": "DIM",
+            "start": "",
+            "end": ""
         }
     ]
 
