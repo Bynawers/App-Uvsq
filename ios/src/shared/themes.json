@@ -1,0 +1,10 @@
+{
+    "classic": {
+        "primary": "#69043d",
+        "secondary": "#0dbdf4",
+        "foreground": "white",
+        "background": "f2f2f2",
+        "textLight": "white",
+        "textDark": "#1D2424"
+    }
+}

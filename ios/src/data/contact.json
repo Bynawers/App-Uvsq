@@ -1,0 +1,412 @@
+{
+    "data": [
+        {
+            "name": "Licence",
+            "data": [
+                {
+                    "name": "Licence 1 Biologie-Informatique / Informatique LAS",
+                    "contacts": [
+                        {
+                            "contact": "Mme Estelle MEREL",
+                            "room": "Bureau 1203",
+                            "phone": "01 39 25 46 94",
+                            "mail": "estelle.merel@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "Licence 1 Chimie-Biologie / Chimie-Biologie LAS",
+                    "contacts": [
+                        {
+                            "contact": "Mme Estelle MEREL",
+                            "room": "Bureau 1203",
+                            "phone": "01 39 25 46 94",
+                            "mail": "estelle.merel@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "LDD 1 CB / LDD 1 BI",
+                    "contacts": [
+                        {
+                            "contact": "Mme Estelle MEREL",
+                            "room": "Bureau 1203",
+                            "phone": "01 39 25 46 94",
+                            "mail": "estelle.merel@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "Licence 1 Mathématiques-Physique-Chimie / L1 MPC LAS",
+                    "contacts": [
+                        {
+                            "contact": "Mme Célena BELKACEM",
+                            "room": "Bureau 1205",
+                            "phone": "01 39 25 40 97",
+                            "mail": "celena.belkacem@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "Licence 1 Mathématiques-Informatiques / L1 MI LAS",
+                    "contacts": [
+                        {
+                            "contact": "Mme Célena BELKACEM",
+                            "room": "Bureau 1205",
+                            "phone": "01 39 25 40 97",
+                            "mail": "celena.belkacem@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "Licence 1 MIASHS / LDD MP",
+                    "contacts": [
+                        {
+                            "contact": "Mme Célena BELKACEM",
+                            "room": "Bureau 1205",
+                            "phone": "01 39 25 40 97",
+                            "mail": "celena.belkacem@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "Licence 2 & 3 Physique",
+                    "contacts": [
+                        {
+                            "contact": "Mme Mélanie MARQUES",
+                            "room": "Bureau 1203",
+                            "phone": "01 39 25 30 21",
+                            "mail": "melanie.marques@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "Licence 2 & 3 Mathématiques",
+                    "contacts": [
+                        {
+                            "contact": "Mme Mélanie MARQUES",
+                            "room": "Bureau 1203",
+                            "phone": "01 39 25 30 21",
+                            "mail": "melanie.marques@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "Licence 2 & 3 MIASHS",
+                    "contacts": [
+                        {
+                            "contact": "Mme Mélanie MARQUES",
+                            "room": "Bureau 1203",
+                            "phone": "01 39 25 30 21",
+                            "mail": "melanie.marques@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "LDD 2 - LDD 3 - MP",
+                    "contacts": [
+                        {
+                            "contact": "Mme Mélanie MARQUES",
+                            "room": "Bureau 1203",
+                            "phone": "01 39 25 30 21",
+                            "mail": "melanie.marques@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "Licence pro IPCA",
+                    "contacts": [
+                        {
+                            "contact": "Mme Mélanie MARQUES",
+                            "room": "Bureau 1203",
+                            "phone": "01 39 25 30 21",
+                            "mail": "melanie.marques@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "Licence 2 & 3 Chimie",
+                    "contacts": [
+                        {
+                            "contact": "Mme Mélanie MARQUES",
+                            "room": "Bureau 1203",
+                            "phone": "01 39 25 30 21",
+                            "mail": "melanie.marques@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "Licence 2 & 3 Informatique",
+                    "contacts": [
+                        {
+                            "contact": "Mme Mélanie MARQUES",
+                            "room": "Bureau 1203",
+                            "phone": "01 39 25 30 21",
+                            "mail": "melanie.marques@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "LDD 2 - LDD3 CB",
+                    "contacts": [
+                        {
+                            "contact": "Mme Mélanie MARQUES",
+                            "room": "Bureau 1203",
+                            "phone": "01 39 25 30 21",
+                            "mail": "melanie.marques@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "Licence 2 & 3 Sciences de la Vie",
+                    "contacts": [
+                        {
+                            "contact": "Mme Anne-Marie GARDETTE",
+                            "room": "Bureau 1204",
+                            "phone": "01 39 25 40 10",
+                            "mail": "Anne.Gardette@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "Licence 2 & 3 Sciences de la Vie  et de la Terre",
+                    "contacts": [
+                        {
+                            "contact": "Mme Anne-Marie GARDETTE",
+                            "room": "Bureau 1204",
+                            "phone": "01 39 25 40 10",
+                            "mail": "Anne.Gardette@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "LDD 2 - LDD 3 - BI",
+                    "contacts": [
+                        {
+                            "contact": "Mme Anne-Marie GARDETTE",
+                            "room": "Bureau 1204",
+                            "phone": "01 39 25 40 10",
+                            "mail": "Anne.Gardette@uvsq.fr"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Master",
+            "data": [
+                {
+                    "name": "Master 1 & 2 AMIS DataScale Secrets",
+                    "contacts": [
+                        {
+                            "contact": "Mr Philippe CANES",
+                            "room": "Bureau 1202",
+                            "phone": "01 39 25 40 08",
+                            "mail": "philippe.canes@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "Master MIASHS",
+                    "contacts": [
+                        {
+                            "contact": "Mr Philippe CANES",
+                            "room": "Bureau 1202",
+                            "phone": "01 39 25 40 08",
+                            "mail": "philippe.canes@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "Master AMS/AA",
+                    "contacts": [
+                        {
+                            "contact": "Mr Philippe CANES",
+                            "room": "Bureau 1202",
+                            "phone": "01 39 25 40 08",
+                            "mail": "philippe.canes@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "Master 1 Mathématiques - MMM - E3A - Chimie",
+                    "contacts": [
+                        {
+                            "contact": "Mme Virginie THUMMADOO",
+                            "room": "Bureau 1202",
+                            "phone": "01 39 25 40 23",
+                            "mail": "virginie.thummadoo@uvsq.fr"
+                        },
+                        {
+                            "contact": "Mme Jennifer PUCHEU-LASHORE",
+                            "room": "Bureau 1202",
+                            "phone": "01 39 25 40 09",
+                            "mail": "jennifer.pusheu-lashores@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "Master 2A2I - BVI GE",
+                    "contacts": [
+                        {
+                            "contact": "Mme Virginie THUMMADOO",
+                            "room": "Bureau 1202",
+                            "phone": "01 39 25 40 23",
+                            "mail": "virginie.thummadoo@uvsq.fr"
+                        },
+                        {
+                            "contact": "Mme Jennifer PUCHEU-LASHORE",
+                            "room": "Bureau 1202",
+                            "phone": "01 39 25 40 09",
+                            "mail": "jennifer.pusheu-lashores@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "Master 1 & 2 EMAS / Master 2 TRIED",
+                    "contacts": [
+                        {
+                            "contact": "Mme Virginie THUMMADOO",
+                            "room": "Bureau 1202",
+                            "phone": "01 39 25 40 23",
+                            "mail": "virginie.thummadoo@uvsq.fr"
+                        },
+                        {
+                            "contact": "Mme Jennifer PUCHEU-LASHORE",
+                            "room": "Bureau 1202",
+                            "phone": "01 39 25 40 09",
+                            "mail": "jennifer.pusheu-lashores@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "Master 2 R2M-RAM-MATEC",
+                    "contacts": [
+                        {
+                            "contact": "Mme Virginie THUMMADOO",
+                            "room": "Bureau 1202",
+                            "phone": "01 39 25 40 23",
+                            "mail": "virginie.thummadoo@uvsq.fr"
+                        },
+                        {
+                            "contact": "Mme Jennifer PUCHEU-LASHORE",
+                            "room": "Bureau 1202",
+                            "phone": "01 39 25 40 09",
+                            "mail": "jennifer.pusheu-lashores@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "Masters 1 Biologie - BIP BG",
+                    "contacts": [
+                        {
+                            "contact": "Mme Virginie THUMMADOO",
+                            "room": "Bureau 1202",
+                            "phone": "01 39 25 40 23",
+                            "mail": "virginie.thummadoo@uvsq.fr"
+                        },
+                        {
+                            "contact": "Mme Jennifer PUCHEU-LASHORE",
+                            "room": "Bureau 1202",
+                            "phone": "01 39 25 40 09",
+                            "mail": "jennifer.pusheu-lashores@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "Masters FESAPCA - MPNC/DU EFCM",
+                    "contacts": [
+                        {
+                            "contact": "Mme Virginie THUMMADOO",
+                            "room": "Bureau 1202",
+                            "phone": "01 39 25 40 23",
+                            "mail": "virginie.thummadoo@uvsq.fr"
+                        },
+                        {
+                            "contact": "Mme Jennifer PUCHEU-LASHORE",
+                            "room": "Bureau 1202",
+                            "phone": "01 39 25 40 09",
+                            "mail": "jennifer.pusheu-lashores@uvsq.fr"
+                        }
+                    ]
+                }
+            ]
+        },
+        {   
+            "name": "Edt",
+            "data": [
+                {
+                    "name": "Emploi du temps Licence 1 & 2",
+                    "contacts": [
+                        {
+                            "contact": "Mme Catherine BOUDREAULT",
+                            "room": "Bureau 1201",
+                            "phone": "01 39 25 42 25",
+                            "mail": "catherine.boudreault@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "Emploi du temps Licence 3",
+                    "contacts": [
+                        {
+                            "contact": "Mme Karine BERTONCELLI",
+                            "room": "Bureau 1201",
+                            "phone": "01 39 25 42 24",
+                            "mail": "karine.bertoncelli@uvsq.fr"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Diplome",
+            "data": [
+                {
+                    "name": "Diplômes (sur RDV uniquement)",
+                    "contacts": [
+                        {
+                            "contact": "Mme Sophie GANTCHENKO",
+                            "room": "Bureau 1208",
+                            "phone": "01 39 25 41 33",
+                            "mail": "sophie.gantchenko@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "Etudiant Boursiers",
+                    "contacts": [
+                        {
+                            "contact": "Mme Sophie GANTCHENKO",
+                            "room": "Bureau 1208",
+                            "phone": "01 39 25 41 33",
+                            "mail": "sophie.gantchenko@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "Annulations Inscription",
+                    "contacts": [
+                        {
+                            "contact": "Mme Sophie GANTCHENKO",
+                            "room": "Bureau 1208",
+                            "phone": "01 39 25 41 33",
+                            "mail": "sophie.gantchenko@uvsq.fr"
+                        }
+                    ]
+                },
+                {
+                    "name": "Culture générale",
+                    "contacts": [
+                        {
+                            "contact": "Mme Sophie GANTCHENKO",
+                            "room": "Bureau 1208",
+                            "phone": "01 39 25 41 33",
+                            "mail": "sophie.gantchenko@uvsq.fr"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

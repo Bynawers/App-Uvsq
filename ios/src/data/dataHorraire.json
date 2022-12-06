@@ -1,0 +1,91 @@
+{
+    "library": [
+        {
+            "id": "dimanche",
+            "day": "DIM",
+            "start": "",
+            "end": ""
+        },
+        {
+            "id": "lundi",
+            "day": "LUN",
+            "start": "08:30",
+            "end": "19:00"
+        },
+        {
+            "id": "mardi",
+            "day": "MAR",
+            "start": "08:30",
+            "end": "19:00"
+        },
+        {
+            "id": "mercredi",
+            "day": "MER",
+            "start": "08:30",
+            "end": "19:00"
+        },
+        {
+            "id": "jeudi",
+            "day": "JEU",
+            "start": "08:30",
+            "end": "19:00"
+        },
+        {
+            "id": "vendredi",
+            "day": "VEN",
+            "start": "08:30",
+            "end": "19:00"
+        },
+        {
+            "id": "samedi",
+            "day": "SAM",
+            "start": "",
+            "end": ""
+        }
+    ],
+    "school": [
+        {
+            "id": "dimanche",
+            "day": "DIM",
+            "start": "",
+            "end": ""
+        },
+        {
+            "id": "lundi",
+            "day": "LUN",
+            "start": "09:00",
+            "end": "16:30"
+        },
+        {
+            "id": "mardi",
+            "day": "MAR",
+            "start": "13:30",
+            "end": "16:30"
+        },
+        {
+            "id": "mercredi",
+            "day": "MER",
+            "start": "08:30",
+            "end": "12:30"
+        },
+        {
+            "id": "jeudi",
+            "day": "JEU",
+            "start": "09:00",
+            "end": "16:30"
+        },
+        {
+            "id": "vendredi",
+            "day": "VEN",
+            "start": "09:00",
+            "end": "16:30"
+        },
+        {
+            "id": "samedi",
+            "day": "SAM",
+            "start": "",
+            "end": ""
+        }
+    ]
+
+}
