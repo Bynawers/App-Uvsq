@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { RFValue } from "react-native-responsive-fontsize";
 
 const Header = (props) => {
 
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
 
   title: {
     marginTop: "2%",
-    fontSize: 25,
+    fontSize: RFValue(20),
     fontWeight: "800"
   },
 

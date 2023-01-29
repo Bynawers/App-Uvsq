@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Linking, Image, Platform } from 'react-native';
+import { RFValue } from "react-native-responsive-fontsize";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { Ionicons } from '@expo/vector-icons';
+import { openComposer } from "react-native-email-link";
 
 import BottomTabNavigation from './BottomTabNavigation';
 
@@ -61,10 +63,10 @@ const CustomDrawer = ({navigation}) => {
 
       <View style={styles.headerContainer}>
         <View style={[{ height: 100, marginRight: "5%" }, styles.shadow]}>
-          <Image source={require("../../assets/uvsq-logo.png")} style={[styles.image, styles.shadow]}/>
+          <Image source={require("../../assets/UvsqCalendar-logo.png")} style={[styles.image, styles.shadow]}/>
         </View>
         <View style={styles.title}>
-          <Text style={styles.titleText}>EDT Uvsq</Text>
+          <Text style={styles.titleText}>Uvsq Calendar</Text>
           <Text style={styles.subTitleText}>2022 - 2023</Text>
         </View>
       </View>
@@ -88,7 +90,10 @@ const NavigationButton = (props) => {
       Linking.canOpenURL('mailto:bynawers.fratczak@gmail.com')
       .then(supported => {
         if (!supported) {
-          console.log('Cant handle url')
+          openComposer({
+            to: "mailto:bynawers.fratczak@gmail.com",
+            subject: "Bug Report",
+          });
         } else {
           return Linking.openURL('mailto:bynawers.fratczak@gmail.com')
             .catch(e => { console.log("error mail") })
@@ -101,12 +106,11 @@ const NavigationButton = (props) => {
     }
   }
 
-
   return(
-    <TouchableOpacity style={{ backgroundColor: props.select === props.name ? "white" : "#69043d", width: "75%", borderRadius: 10, flexDirection: "row", padding: 10, alignItems: "center", marginBottom: 20 }}
+    <TouchableOpacity style={{ backgroundColor: props.select === props.name ? "white" : "#69043d", width: "75%", borderRadius: 10, flexDirection: "row", padding: 10, alignItems: "center", marginBottom: RFValue(10) }}
     onPress={() => togglePage()}>
       <Ionicons name={props.select === props.name ? props.icon : props.iconOutline} color={props.select === props.name ? "black" : "white"} size={20}/>
-      <Text style={{ color: props.select === props.name ? "black" : "white", marginLeft: 10 }}>{props.name}</Text>
+      <Text style={{ color: props.select === props.name ? "black" : "white", marginLeft: 10, fontSize: RFValue(10) }}>{props.name}</Text>
     </TouchableOpacity>
   );
 }
@@ -121,7 +125,7 @@ const styles = StyleSheet.create({
     flexDirection: "row", 
     alignItems: "center", 
     justifyContent: "center",
-    marginBottom: "5%"
+    marginBottom: "5%",
   },
   closeButton: {
     height: "13%", 
@@ -137,12 +141,12 @@ const styles = StyleSheet.create({
   },
   titleText: {
     color: "white", 
-    fontSize: 20, 
+    fontSize: RFValue(15), 
     fontWeight:"500"
   },
   subTitleText: {
     color: "white", 
-    fontSize: 18, 
+    fontSize: RFValue(12), 
     fontWeight:"200"
   },
 

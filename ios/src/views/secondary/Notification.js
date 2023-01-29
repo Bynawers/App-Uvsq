@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, ScrollView, View, TouchableOpacity } from 'react-native';
+import { RFValue } from "react-native-responsive-fontsize";
 import { Ionicons } from '@expo/vector-icons';
 
 import { useTheme } from 'react-native-paper';
@@ -39,10 +40,10 @@ const NotificationComponent = (props) => {
   return(
     <View style={styles.notificationContainer}>
       <Text style={{ color: props.theme.classic.textDark, fontSize: 14, marginBottom: "1%" }}>
-        <Text style={{ fontWeight: "600" }}>{props.date}  </Text>
-        <Text style={{ fontWeight: "300"}}>-  {props.title}</Text>
+        <Text style={{ fontWeight: "600", fontSize: RFValue(12) }}>{props.date}  </Text>
+        <Text style={{ fontWeight: "300", fontSize: RFValue(12)}}>-  {props.title}</Text>
       </Text>
-      <Text style={{ fontWeight: "300", fontSize: 12, paddingLeft: "5%" }}>
+      <Text style={{ fontWeight: "300", fontSize: RFValue(10), paddingLeft: "5%" }}>
         {props.content}
       </Text>
     </View>

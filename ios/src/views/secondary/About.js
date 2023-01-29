@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Linking } from 'react-native';
+import { RFValue } from "react-native-responsive-fontsize";
 import { Ionicons } from '@expo/vector-icons';
 
 import { useTheme } from 'react-native-paper';
@@ -25,15 +26,15 @@ export default function About({ navigation }) {
       <View style={styles.contentContainer}>
         <Text style={[styles.text, { marginBottom: 20, color: theme.classic.textLight }]}>
           <Text>•</Text>
-          <Text style={{ fontWeight: "400" }}>  Application non-officiel de l’UVSQ</Text>
-          <Text> - Ufr des sciences réalisé par un étudiant en 3ème année d’informatique</Text>
+          <Text style={{ fontWeight: "400", fontSize: RFValue(12) }}>  Application non-officielle de l’UVSQ</Text>
+          <Text style={{ fontSize: RFValue(11)}}> - Ufr des sciences réalisé par un étudiant en 3ème année d’informatique</Text>
         </Text>
         <Text style={[styles.text, { marginBottom: 20, color: theme.classic.textLight }]}>
           <Text>•</Text>
-          <Text>  Pour toute suggestions, amélioration, n'hésitez pas à me contacter via l'adresse mail suivante :</Text>
+          <Text>  Pour toutes suggestions, amélioration, n'hésitez pas à me contacter via l'adresse mail suivante :</Text>
         </Text>
         <View style={styles.mailContainer}>
-          <Text style={{ fontWeight: "400", color: theme.classic.textLight }}> Bynawers.fratczak@gmail.com</Text>
+          <Text style={{ fontWeight: "400", color: theme.classic.textLight, fontSize: RFValue(12) }}> Bynawers.fratczak@gmail.com</Text>
         </View>
       </View>
 
@@ -83,11 +84,11 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 24, 
+    fontSize: RFValue(20), 
     fontWeight: "700"
   },
   text: {
-    fontSize: 16, 
+    fontSize: RFValue(12), 
     fontWeight: "200",
   },
 

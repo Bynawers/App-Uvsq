@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "App-Uvsq",
+    "name": "Uvsq Calendar",
     "slug": "App-Uvsq",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/UvsqCalendar-logo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/UvsqCalendar-logo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#69043d"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -19,17 +19,19 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.bynawers.AppUvsq"
+      "bundleIdentifier": "com.bynawers.AppUvsq",
+      "versionCode": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/UvsqCalendar-logo.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.bynawers.AppUvsq"
+      "package": "com.bynawers.AppUvsq",
+      "versionCode": 2
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/UvsqCalendar-logo.png"
     },
     "extra": {
       "eas": {

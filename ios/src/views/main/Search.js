@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, ScrollView, FlatList, ActivityIndicator, useWindowDimensions, Platform } from 'react-native';
+import { RFValue } from "react-native-responsive-fontsize";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons, Feather } from '@expo/vector-icons';
 import axios, * as others from 'axios';
@@ -109,6 +110,7 @@ export default function Search({navigation}) {
 
   const refreshDateRendering = (add) => {
     let new_currentDate;
+    setTimetable([]);
     if (add === 444) {
       new_currentDate = new Date();
     }
@@ -213,7 +215,7 @@ export default function Search({navigation}) {
 
           <View style={{ marginBottom: groupListVisible ? 0 : 10 }}>
             <TouchableOpacity style={{ flexDirection: "row", alignItems: "center", marginLeft: 10 }} onPress={() => setGroupListVisible(!groupListVisible)}>
-              <Text style={{ fontSize: 20, fontWeight: "300", marginRight: 10 }}>Mes groupes</Text>
+              <Text style={styles.myGroupsText}>Mes groupes</Text>
             </TouchableOpacity>
             {groupListVisible &&
             <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -277,7 +279,7 @@ const GroupElement = (props) => {
     <View style={{ flex: 1, justifyContent: "center", marginRight: 10 }}>
       <TouchableOpacity style={[{ backgroundColor: props.group === props.code ? props.theme.classic.secondary : "#f2f2f2" }, styles.buttonGroup, styles.shadow]}
       onPress={() => { props.setGroup(props.code); }}>
-        <Text style={{color: props.group === props.code ? props.theme.classic.textLight : props.theme.classic.textDark}}>{props.code}</Text>
+        <Text style={[{color: props.group === props.code ? props.theme.classic.textLight : props.theme.classic.textDark}, styles.tinyText]}>{props.code}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -342,21 +344,29 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
 
+  tinyText: {
+    fontSize: RFValue(10),
+  },
   text: {
-    fontSize: 15,
+    fontSize: RFValue(15),
   },
   textDay: {
-    fontSize: 25,
+    fontSize: RFValue(20),
     fontWeight: '300',
   },
   textDate: {
-    fontSize: 20,
+    fontSize: RFValue(15),
     fontWeight: '100',
   },
   textTitleDay: {
-    fontSize: 15,
+    fontSize: RFValue(12),
     marginTop: 10,
     fontWeight: '600'
+  },
+  myGroupsText: {
+    fontSize: RFValue(15), 
+    fontWeight: "300", 
+    marginRight: 10
   },
 
 
@@ -387,10 +397,9 @@ const styles = StyleSheet.create({
     shadowColor: '#171717',
     shadowOffset: {width: 0, height: 3},
     shadowOpacity: 0.4,
-    shadowRadius: 5,
-  } : 
-  { 
-    elevation: 3
+    shadowRadius: 2,
+  } : {
+    elevation: 5
   },
   line: {
     height: 1,

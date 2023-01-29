@@ -1,17 +1,27 @@
 [
     {
-        "title": "Nouvelle Mise à jour v_0.6",
+        "title": "Mise à jour 1.0",
+        "date": "2022/12/04",
+        "content": "Compatibilité android / ios"
+    },
+    {
+        "title": "Mise à jour 0.75",
         "date": "2022/11/11",
-        "content": "Ajout de nouvelle fonctionnalité : Drawer Acceuil + pages"
+        "content": "Page détails pour component Celcat"
     },
     {
-        "title": "Nouvelle Mise à jour v_0.5",
+        "title": "Mise à jour 0.7",
+        "date": "2022/11/11",
+        "content": "Drawer Acceuil + pages"
+    },
+    {
+        "title": "Mise à jour 0.6",
         "date": "2022/11/08",
-        "content": "Ajout de nouvelle fonctionnalité : fix de bug"
+        "content": "Fix de bugs majeurs"
     },
     {
-        "title": "Nouvelle Mise à jour v_0.4",
+        "title": "Mise à jour 0.5",
         "date": "2022/11/05",
-        "content": "Ajout de nouvelle fonctionnalité : Find Room, CELCAT, Accueil"
+        "content": "Ajout Pages Find Room, CELCAT, Accueil"
     }
 ]

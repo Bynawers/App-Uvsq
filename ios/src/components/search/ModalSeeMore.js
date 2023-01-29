@@ -7,15 +7,17 @@ const ModalSeeMore = (props) => {
   return (
     <Modal
     style={{ margin: 0 }}
-    backdropOpacity={0}
+    backdropOpacity={0.3}
     isVisible={props.modalSeeMore}
     hideModalContentWhileAnimating={true}
-    backdropTransitionOutTiming={0}
+	backdropTransitionInTiming={2000}
+	backgroundTransitionOutTiming={0}
     onSwipeComplete={() => props.setModalSeeMore(false)}
     onBackdropPress={() => props.setModalSeeMore(false)}
     swipeDirection="down"
-	  animationType="slide"
+	animationType="slide"
     propagateSwipe
+	statusBarTranslucent
 		>
 		<View style={styles.modalContainer}>
 

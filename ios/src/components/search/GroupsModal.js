@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Keyboard, Pressable, Modal, FlatList, ActivityIndicator, useWindowDimensions, Platform } from 'react-native';
+import { RFValue } from "react-native-responsive-fontsize";
 import { Ionicons } from '@expo/vector-icons';
 import axios, * as others from 'axios';
 
@@ -96,12 +97,14 @@ const GroupsModal = (props) => {
       onBackdropPress={() => props.toggleModal() }
       onSwipeComplete={() => props.toggleModal() }
       animationIn="zoomInDown"
+      propagateSwipe
+	    statusBarTranslucent
       visible={props.modalGroups}
       style={{ margin: 0, minHeight: Math.round(windowHeight)}}>
       <View style={[ styles.modalContainer]}>
         <View style={styles.titleContainer}>
           <View style={{flex: 1}}/>
-          <Text style={{ fontSize: 20, fontWeight: 'bold', color: props.theme.classic.textDark }}>Ajouter un groupe</Text>
+          <Text style={{ fontSize: RFValue(15), fontWeight: 'bold', color: props.theme.classic.textDark }}>Ajouter un groupe</Text>
           <TouchableOpacity style= {{flex: 1, alignItems: "flex-end"}} onPress={() => {deleteSearch(), props.toggleModal()}}>
             <Ionicons name="close" size={40} color={props.theme.classic.textDark}/>
           </TouchableOpacity>
@@ -160,7 +163,7 @@ const MyGroupsItem = (props) => {
       <TouchableOpacity style={[{backgroundColor: isValue ? props.theme.classic.primary : props.theme.classic.foreground}, styles.buttonCurrentGroup, styles.shadow]}
       onPress={() => props.setGroup(props.code)}>
         <View style={{ flex: 1 }}>
-          <Text style={[{color: isValue ? props.theme.classic.textLight : props.theme.classic.textDark}]}>{props.code}</Text>
+          <Text style={[{color: isValue ? props.theme.classic.textLight : props.theme.classic.textDark, fontSize: RFValue(10)}]}>{props.code}</Text>
         </View>
         <TouchableOpacity style={{ flex: .15}}
         onPress={() => {props.deleteGroup(props.code)}}>
@@ -198,10 +201,10 @@ const styles = StyleSheet.create({
   },
 
   textButton: {
-    fontSize: 15,
+    fontSize: RFValue(12),
   },
   textTitleList: {
-    fontSize: 20,
+    fontSize: RFValue(15),
     marginBottom: 10, 
     paddingLeft: 20
   },

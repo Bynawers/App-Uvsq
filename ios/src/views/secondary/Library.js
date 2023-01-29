@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, Image, View, TouchableOpacity, Linking } from 'react-native';
+import { RFValue } from "react-native-responsive-fontsize";
 import { Ionicons } from '@expo/vector-icons';
 
 import WeekList from "../../components/shared/WeekList.js"
@@ -26,7 +27,7 @@ export default function Library({ navigation }) {
       </View>
       <View style={styles.mainContainer}>
         <WeekList data={dataHorraire.library} theme={theme} type="library"/>
-        <Affluence theme={theme}/>
+      
       </View>
     </View>
   );
@@ -78,12 +79,11 @@ const styles = StyleSheet.create({
   },
 
   title: { 
-    fontSize: 20,
-    paddingLeft: "10%",
+    fontSize: RFValue(15),
     fontWeight: "700"
   },
   subTitle: { 
-    fontSize: 20,
+    fontSize: RFValue(15),
     paddingLeft: "10%",
     fontWeight: "500"
   },

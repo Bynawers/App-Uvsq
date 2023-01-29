@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, Pressable, Platform } from 'react-native';
+import { StyleSheet, Text, Pressable, Platform, Dimensions } from 'react-native';
+import { RFValue } from "react-native-responsive-fontsize";
 import * as Haptics from 'expo-haptics';
 
 const CelcatElement = (props) => {
@@ -28,13 +29,13 @@ const CelcatElement = (props) => {
       <Pressable style={[{  backgroundColor: background, height: heightElement }, styles.shadow, styles.celcatElementContainer ]}
       onLongPress={() => openDetail()}>
         <Text style={{ flexShrink: 1}}>
-            <Text style={{ fontWeight: "500" }}>{props.dateStart} - {props.dateEnd} - {props.type}{"\n"}</Text>
-            <Text style={{ fontWeight: "500" }}>Cours : </Text>
-            <Text style={{ flexShrink: 1, fontWeight: "300" }}>{props.course}{"\n"}</Text>
-            <Text style={{ fontWeight: "500" }}>Salle : </Text>
-            <Text style={{ flexShrink: 1, fontWeight: "300" }}>{props.room}{"\n"}</Text>
-            <Text style={{ fontWeight: "500" }}>Groupe : </Text>
-            <Text style={{ flexShrink: 1, fontWeight: "300" }}>{props.group}</Text>
+            <Text style={styles.titleComponentText}>{props.dateStart} - {props.dateEnd} - {props.type}{"\n"}</Text>
+            <Text style={styles.titleComponentText}>Cours : </Text>
+            <Text style={styles.contentText}>{props.course}{"\n"}</Text>
+            <Text style={styles.titleComponentText}>Salle : </Text>
+            <Text style={styles.contentText}>{props.room}{"\n"}</Text>
+            <Text style={styles.titleComponentText}>Groupe : </Text>
+            <Text style={styles.contentText}>{props.group}</Text>
         </Text>
       </Pressable>
     );
@@ -42,7 +43,7 @@ const CelcatElement = (props) => {
 
 const styles = StyleSheet.create({
     celcatElementContainer: { 
-        width: "90%",  
+        width: Dimensions.get('window').width - Dimensions.get('window').width*0.1,  
         borderRadius: 20, 
         borderWidth: 1, 
         borderColor: "#858585", 
@@ -58,6 +59,15 @@ const styles = StyleSheet.create({
       shadowRadius: 2,
     } : {
       elevation: 3,
+    },
+    titleComponentText: {
+      fontWeight: "500", 
+      fontSize: RFValue(12)
+    },
+    contentText: {
+      fontSize: RFValue(10),
+      flexShrink: 1, 
+      fontWeight: "300"
     }
 });
 

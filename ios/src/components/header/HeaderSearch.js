@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Platform } from 'react-native';
+import { RFValue } from "react-native-responsive-fontsize";
 
 const Header = (props) => {
 
@@ -39,13 +40,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-end"
   },
-  shadow: {
-    shadowColor: '#171717',
-    shadowOffset: {width: 0, height: 3},
-    shadowOpacity: 0.4,
-    elevation: 3,
-    shadowRadius: 2,
-  },
   headerButtonContainer: {
     alignItems: "center",
     flexDirection: 'row',
@@ -72,9 +66,23 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     borderRadius: 10,
   },
+
+  shadow: Platform.OS === 'ios' ? {
+    shadowColor: '#171717',
+    shadowOffset: {width: 0, height: 3},
+    shadowOpacity: 0.4,
+    shadowRadius: 5,
+  } : 
+  { 
+    elevation: 3
+  },
+
   title: {
-    fontSize: 25,
+    fontSize: RFValue(20),
     fontWeight: "800"
+  },
+  text: {
+    fontSize: RFValue(10),
   },
 });
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { RFValue } from "react-native-responsive-fontsize";
 import { Ionicons } from '@expo/vector-icons';
 
 import WeekList from "../../components/shared/WeekList.js"
@@ -28,7 +29,7 @@ export default function School({ navigation }) {
       </View>
       <View style={styles.mainContainer}>
         <WeekList data={dataHorraire.school} theme={theme} type="school"/>
-        <Text style={[{color: theme.classic.textLight}, styles.lightText]}>ATTENTION : Fermé tout les jours de 12:30 à 13:30</Text>
+        <Text style={[{color: theme.classic.textLight}, styles.lightText]}>ATTENTION : Fermé tous les jours de 12:30 à 13:30</Text>
       </View>
     </View>
   );
@@ -72,11 +73,11 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 20, 
+    fontSize: RFValue(15), 
     fontWeight: "700",
   },
   subTitle: {
-    fontSize: 20, 
+    fontSize: RFValue(12), 
     fontWeight: "400",
   },
   findContactText: {
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
     fontWeight: "300"
   },
   lightText: {
-    fontSize: 12,
+    fontSize: RFValue(10),
     fontWeight: "200",
   },
   

@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { RFValue } from "react-native-responsive-fontsize";
 
 const Library = (props) => {
 
   const [isOpen, setIsOpen] = useState(false);
   let currentDate = new Date();   
-
-  console.log(props.data)
-
   
   useEffect(() => {
     let start = new Date(currentDate.toISOString().slice(0, 10).replace(/-/g, "/")+ " " +props.data[currentDate.getDay()].start);
@@ -27,12 +25,11 @@ const Library = (props) => {
 
   return(
     <View style={styles.mainContainer}>
-      <Text style={styles.title}>Horraire</Text>
+      <Text style={styles.title}>Horaire</Text>
       <View style={styles.listContainer}>
         {props.data.map((item, index) => {  
           let currentDay = props.data[ currentDate.getDay() ].id === item.id; 
           let isWeekend = item.id === "samedi" || item.id === "dimanche";
-          console.log(item)
           return(
             <React.Fragment key={index}>   
               { !isWeekend &&
@@ -75,17 +72,17 @@ const styles = StyleSheet.create({
   },
   title: {
     color: "white", 
-    fontSize: 20,
+    fontSize: RFValue(15),
     paddingLeft: "10%",
     fontWeight: "500"
   },
   textContent: {
     fontWeight: '300',
-    fontSize: 15
+    fontSize: RFValue(12)
   },
   textHour: {
     fontWeight: '200',
-    fontSize: 12
+    fontSize: RFValue(11)
   }
 });
 

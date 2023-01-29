@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, ScrollView, View, TouchableOpacity } from 'react-native';
+import { RFValue } from "react-native-responsive-fontsize";
 import { Ionicons } from '@expo/vector-icons';
 
 import { useTheme } from 'react-native-paper';
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 24, 
+    fontSize: RFValue(20), 
     fontWeight: "700",
     color: "white"
   },

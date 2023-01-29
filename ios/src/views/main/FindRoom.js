@@ -75,7 +75,7 @@ export default function FindRoom() {
 
     if (isClose) { return; }
 
-    let date = new Date("2022/11/24 13:54");
+    let date = new Date();
     let url = 'https://edt.uvsq.fr/Home/GetCalendarData'
     let data = { 'start':date,'end':date,'resType':'102','calView':'agendaDay','federationIds[]':room }
 
@@ -107,7 +107,7 @@ export default function FindRoom() {
       </View>
       <View style={[{ backgroundColor: theme.classic.background }, styles.mainContainer]}>
         <View style={styles.headerScrollList}>
-          <Text style={styles.h1Light}>Salles disponibles</Text>
+          <Text style={styles.h2Light}>Salles disponibles</Text>
         </View>
         <View style={[{ backgroundColor: "#e2e2e2", height: 1, width: "100%", }]}/>
         <ScrollView contentContainerStyle={{ flexGrow: 1, alignItems: 'center' }} style={{ flex: 1, paddingBottom:  0, width: "100%"}}>
@@ -199,7 +199,7 @@ const RoomComponent = (props) => {
         {hasLine && <View style={[{backgroundColor: "#E3E3E3" }, styles.line]}/>}
       </View>
       <View style={[styles.untilIndicator]}>
-        <Text style={[{ color: props.theme.classic.textLight}, styles.text]}>{props.until}</Text>
+        <Text style={[{ color: props.theme.classic.textLight, marginLeft: 10, marginRight: 10}, styles.text]}>{props.until}</Text>
         {hasLine && <View style={[{backgroundColor: "#0188AE" }, styles.line]}/>}
       </View>
     </View>
@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
   },
   untilIndicator: {
     height: "100%",
-    width: 100,
+    width: "40%",
     right: 0,
     position: "absolute",
     justifyContent: "center",
@@ -298,7 +298,7 @@ const styles = StyleSheet.create({
     fontWeight: "400"
   },
   text: {
-    fontSize: RFValue(9)
+    fontSize: RFValue(8),
   },
 
   line: {

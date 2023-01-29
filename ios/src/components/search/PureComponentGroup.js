@@ -1,12 +1,13 @@
 import React, { memo } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Platform } from 'react-native';
+import { RFValue } from "react-native-responsive-fontsize";
 
 const GroupItem = (props) => {
   return(
     <>
       <TouchableOpacity style={[{backgroundColor: props.theme.classic.foreground}, styles.buttonGroup, styles.shadow]}
       onPress={() => props.addGroup(props.code, props.name)}>
-        <Text style={[{color: props.theme.classic.textDark}]}>{props.name}</Text>
+        <Text style={[{color: props.theme.classic.textDark, fontSize: RFValue(10)}]}>{props.name}</Text>
       </TouchableOpacity>
       <View style={styles.line}/>
     </>

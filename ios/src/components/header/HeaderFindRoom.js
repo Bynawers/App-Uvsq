@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { RFValue } from "react-native-responsive-fontsize";
 
 const Header = (props) => {
 
@@ -31,7 +32,7 @@ const BatimentButton = (props) => {
   return(
     <TouchableOpacity style={[{ backgroundColor: props.batiment === props.name ? props.theme.classic.secondary : props.theme.classic.foreground }, styles.selectButton ]}
     onPress={() => props.toggleBatiment(props.name)}>
-      <Text style={{ fontSize: 10, color: props.batiment === props.name ? props.theme.classic.textLight : props.theme.classic.textDark }}>{props.name}</Text>
+      <Text style={{ fontSize: RFValue(8), color: props.batiment === props.name ? props.theme.classic.textLight : props.theme.classic.textDark }}>{props.name}</Text>
     </TouchableOpacity>
   );
 }
@@ -57,8 +58,11 @@ const styles = StyleSheet.create({
     width: "85%"
   },
   title: {
-    fontSize: 25,
+    fontSize: RFValue(19),
     fontWeight: "800"
+  },
+  text: {
+    fontSize: RFValue(10),
   },
   selectButton: {
     paddingLeft: 10,

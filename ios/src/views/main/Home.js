@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image, Linking, Platform } from 'react-native';
+import { RFValue } from "react-native-responsive-fontsize";
 
 import { useTheme } from 'react-native-paper';
 
@@ -31,9 +32,9 @@ export default function Home({ navigation }) {
        
         <Text style={styles.subTitle}>Mon dossier étudiant</Text>
         <View style={[styles.contentDossierContainer, styles.shadow]}>
-          <LinkContainer type="dossier" name="📁  Notes et résultat" last={false} url="https://mondossierweb2.dsi.uvsq.fr/#!notesView"/>
           <LinkContainer type="dossier" name="📅  Calendrier Universitaire" last={false} url="https://www.uvsq.fr/calendriers-universitaires-de-lufr-des-sciences-2022-2023"/>
-          <LinkContainer type="dossier" name="👤  Etat civil" last={true} url="https://mondossierweb2.dsi.uvsq.fr/#!etatCivilView"/>
+          <LinkContainer type="dossier" name="👤  Etat civil" last={false} url="https://mondossierweb2.dsi.uvsq.fr/#!etatCivilView"/>
+          <LinkContainer type="dossier" name="📁   Contrat pédagogique" last={true} url="https://inscription.uvsq.fr/ipweb/jsp/contrat_peda_standalone.jsf"/>
         </View>
 
       </View>
@@ -53,7 +54,7 @@ const LinkContainer = (props) => {
         onPress={() => openUrl(props.url)}>
           <Image style={styles.image} source={props.image}/>
         </TouchableOpacity>
-        <Text>{props.name}</Text>
+        <Text style={{ fontSize: RFValue(12) }}>{props.name}</Text>
       </View>
     );
   }
@@ -61,7 +62,7 @@ const LinkContainer = (props) => {
     return(
       <View style={{ width: "100%" }}>
         <TouchableOpacity style={styles.dossierContainer} onPress={() => openUrl(props.url)}>
-          <Text>{props.name}</Text>
+          <Text style={{ fontSize: RFValue(11) }}>{props.name}</Text>
         </TouchableOpacity>
         {!props.last && <View style={styles.line}/>}
       </View>
@@ -127,10 +128,10 @@ const styles = StyleSheet.create({
 
   title: {
     fontWeight: "200",
-    fontSize: 20,
+    fontSize: RFValue(17),
   },
   subTitle: {
-    fontSize: 20,
+    fontSize: RFValue(15),
     fontWeight: "300",
     paddingLeft: "10%",
     marginBottom: 10

@@ -12,7 +12,7 @@ export default function WelcomePage({ navigation }) {
 
       <View style={styles.headerContainer}>
         <View style={[{ height: 100, marginRight: "5%" }, styles.shadow]}>
-          <Image source={require("../../../assets/uvsq-logo.png")} style={[styles.image, styles.shadow]}/>
+          <Image source={require("../../../assets/UvsqCalendar-logo.png")} style={[styles.image, styles.shadow]}/>
         </View>
         <View style={styles.title}>
           <Text style={[{color: theme.classic.textLight}, styles.titleText]}>EDT Uvsq</Text>
