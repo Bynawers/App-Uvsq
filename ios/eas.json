@@ -15,5 +15,14 @@
       },
       "production": {
       }
+    },
+    "submit": {
+      "production": {
+        "ios": {
+          "appleId": "theo.fratczak@gmail.com",
+          "ascAppId": "1660419659",
+          "appleTeamId": "4K3GVPTRQ2"
+        }
+      }
     }
   }
