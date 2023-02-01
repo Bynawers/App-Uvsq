@@ -2,7 +2,7 @@
   "expo": {
     "name": "Uvsq Calendar",
     "slug": "App-Uvsq",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/UvsqCalendar-logo.png",
     "userInterfaceStyle": "light",
@@ -28,7 +28,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.bynawers.AppUvsq",
-      "versionCode": 2
+      "versionCode": 3
     },
     "web": {
       "favicon": "./assets/UvsqCalendar-logo.png"

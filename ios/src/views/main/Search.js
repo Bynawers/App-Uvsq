@@ -168,6 +168,7 @@ export default function Search({navigation}) {
     let url = 'https://edt.uvsq.fr/Home/GetCalendarData'
     let data = { 'start':date_start,'end':date_end,'resType':'103','calView':'agendaDay','federationIds[]':td }
 
+    console.log(data)
     axios({
       method: "post",
       url: url,
@@ -178,6 +179,32 @@ export default function Search({navigation}) {
         var result = JSON.parse(JSON.stringify(response.data));
         setLoading(false);
         setTimetable(parseDataCelcat(result));
+        isSorted(false);
+      })
+      .catch(function (response) {
+        console.log("error : " + response);
+        setErrorType(response);
+        setLoading(true);
+        return;
+      });
+  }
+
+  const test = () => {
+    let url = 'https://edt.uvsq.fr/Home/GetCalendarData'
+    let data = { 'start': "2023-02-01",'end': "2023-02-1",'resType':'103','calView':'agendaDay','federationIds[]':"S4LDDMP" }
+
+    console.log(data)
+    axios({
+      method: "post",
+      url: url,
+      data: data,
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+      .then(function (response) {
+        var result = JSON.parse(JSON.stringify(response.data));
+        setLoading(false);
+        setTimetable(parseDataCelcat(result));
+        console.log(result)
         isSorted(false);
       })
       .catch(function (response) {
@@ -201,10 +228,12 @@ export default function Search({navigation}) {
         <View style={[ { backgroundColor: theme.classic.foreground }, styles.foregroundContainer]}>
 
           <View style={styles.selectContainer}>
+            
             <TouchableOpacity style={styles.buttonChevronLeft} onPress={() => refreshDateRendering(toggleType === "day" ? -1 : -7)}>
               <Feather name="chevron-left" size={35} color={theme.classic.textDark}/>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.dateContainer}>
+            <TouchableOpacity style={styles.dateContainer}
+            onPress={() => test()}>
               <Text style={[{color: theme.classic.textDark}, styles.textDay]}>{day}</Text>
               <Text style={[{color: theme.classic.textDark}, styles.textDate]}>{date}</Text>
             </TouchableOpacity>
